@@ -207,6 +207,11 @@ public class Pencarian extends javax.swing.JFrame {
         });
 
         jButton9.setText("Lihat data secara lengkap");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -324,15 +329,23 @@ public class Pencarian extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCariActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        KartuTIK k = new KartuTIK();
-        if (k.tipeUser.equalsIgnoreCase("1")) {
-            MenuAdmin m = new MenuAdmin();
-            m.setVisible(true);
-            this.dispose();
-        } else {
+        MenuAdmin m = new MenuAdmin();
+        m.setVisible(true);
+        this.dispose();
 
-        }
+//        KartuTIK k = new KartuTIK();
+//        if (k.tipeUser.equalsIgnoreCase("1")) {
+//            MenuAdmin m = new MenuAdmin();
+//            m.setVisible(true);
+//            this.dispose();
+//        } else {
+//
+//        }
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments

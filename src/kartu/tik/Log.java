@@ -193,14 +193,18 @@ public class Log extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
-        KartuTIK k = new KartuTIK();
-        if (k.tipeUser.equalsIgnoreCase("1")) {
-            MenuAdmin m = new MenuAdmin();
-            m.setVisible(true);
-            this.dispose();
-        } else {
+        MenuAdmin m = new MenuAdmin();
+        m.setVisible(true);
+        this.dispose();
 
-        }
+//        KartuTIK k = new KartuTIK();
+//        if (k.tipeUser.equalsIgnoreCase("1")) {
+//            MenuAdmin m = new MenuAdmin();
+//            m.setVisible(true);
+//            this.dispose();
+//        } else {
+//
+//        }
     }//GEN-LAST:event_btnKeluarActionPerformed
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
