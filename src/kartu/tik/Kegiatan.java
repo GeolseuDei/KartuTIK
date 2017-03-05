@@ -265,29 +265,36 @@ public class Kegiatan extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        KartuTIK k = new KartuTIK();
-        if (!txtNoInduk.getText().isEmpty() || !txtKegiatan.getText().isEmpty()) {
-            int reply = JOptionPane.showConfirmDialog(this, "Apa anda yakin untuk membatalkan?", "Peringatan", JOptionPane.YES_NO_OPTION);
-            if (reply == JOptionPane.YES_OPTION) {
-                if (k.tipeUser.equalsIgnoreCase("1")) {
-                    MenuAdmin f = new MenuAdmin();
-                    f.setVisible(true);
-                    this.dispose();
-                } else {
-                    
-                }
-            } else {
 
-            }
-        } else {
-            if (k.tipeUser.equalsIgnoreCase("1")) {
-                MenuAdmin f = new MenuAdmin();
-                    f.setVisible(true);
-                    this.dispose();
-            } else {
-                
-            }
+        int reply = JOptionPane.showConfirmDialog(this, "Apa anda yakin untuk membatalkan?", "Peringatan", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            MenuAdmin f = new MenuAdmin();
+            f.setVisible(true);
+            this.dispose();
         }
+
+//        if (!txtNoInduk.getText().isEmpty() || !txtKegiatan.getText().isEmpty()) {
+//            int reply = JOptionPane.showConfirmDialog(this, "Apa anda yakin untuk membatalkan?", "Peringatan", JOptionPane.YES_NO_OPTION);
+//            if (reply == JOptionPane.YES_OPTION) {
+//                if (k.tipeUser.equalsIgnoreCase("1")) {
+//                    MenuAdmin f = new MenuAdmin();
+//                    f.setVisible(true);
+//                    this.dispose();
+//                } else {
+//                    
+//                }
+//            } else {
+//
+//            }
+//        } else {
+//            if (k.tipeUser.equalsIgnoreCase("1")) {
+//                MenuAdmin f = new MenuAdmin();
+//                    f.setVisible(true);
+//                    this.dispose();
+//            } else {
+//                
+//            }
+//        }
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtNoIndukInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtNoIndukInputMethodTextChanged
