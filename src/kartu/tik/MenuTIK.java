@@ -151,14 +151,18 @@ public class MenuTIK extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
-        KartuTIK k = new KartuTIK();
-        if (k.tipeUser.equalsIgnoreCase("1")) {
-            MenuAdmin m = new MenuAdmin();
-            m.setVisible(true);
-            this.dispose();
-        } else {
+        MenuAdmin m = new MenuAdmin();
+        m.setVisible(true);
+        this.dispose();
 
-        }
+//        KartuTIK k = new KartuTIK();
+//        if (k.tipeUser.equalsIgnoreCase("1")) {
+//            MenuAdmin m = new MenuAdmin();
+//            m.setVisible(true);
+//            this.dispose();
+//        } else {
+//
+//        }
     }//GEN-LAST:event_btnKeluarActionPerformed
 
     public static int tambahUbah = 0; // 1 = insert , 2 = update , 3 = liat data full dari form Pencarian
@@ -171,22 +175,26 @@ public class MenuTIK extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTambahActionPerformed
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
-        KartuTIK k = new KartuTIK();
-        if (k.tipeUser.equalsIgnoreCase("1") || k.hakAksesUser.equalsIgnoreCase("1")) {
-            tambahUbah = 2;
-            int row = tabelTIK.getSelectedRow();
-            if (row >= 0) {
-                String namaLengkap = tabelTIK.getValueAt(row, 0).toString();
-                k.AmbilDataLengkap(namaLengkap);
-                TambahUbahTIK t = new TambahUbahTIK();
-                t.setVisible(true);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Pilih baris pada tabel yang ingin di ubah.");
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Hanya admin / member dengan hak akses spesial yang dapat menggunakan fitur ubah data.");
-        }
+        TambahUbahTIK t = new TambahUbahTIK();
+        t.setVisible(true);
+        this.dispose();
+
+//        KartuTIK k = new KartuTIK();
+//        if (k.tipeUser.equalsIgnoreCase("1") || k.hakAksesUser.equalsIgnoreCase("1")) {
+//            tambahUbah = 2;
+//            int row = tabelTIK.getSelectedRow();
+//            if (row >= 0) {
+//                String namaLengkap = tabelTIK.getValueAt(row, 0).toString();
+//                k.AmbilDataLengkap(namaLengkap);
+//                TambahUbahTIK t = new TambahUbahTIK();
+//                t.setVisible(true);
+//                this.dispose();
+//            } else {
+//                JOptionPane.showMessageDialog(this, "Pilih baris pada tabel yang ingin di ubah.");
+//            }
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Hanya admin / member dengan hak akses spesial yang dapat menggunakan fitur ubah data.");
+//        }
     }//GEN-LAST:event_btnUbahActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
