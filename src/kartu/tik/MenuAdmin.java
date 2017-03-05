@@ -62,8 +62,8 @@ public class MenuAdmin extends javax.swing.JFrame {
                 addRowToTable();
             }
         };
-        t2 = new Timer(100, updateTabelAction);
-        t2.start();
+//        t2 = new Timer(100, updateTabelAction);
+//        t2.start();
     }
 
     public void addRowToTable() {
@@ -241,40 +241,40 @@ public class MenuAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTIKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTIKActionPerformed
-        t.stop();
-        t2.stop();
+//        t.stop();
+//        t2.stop();
         MenuTIK m = new MenuTIK();
         m.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTIKActionPerformed
 
     private void btnKegiatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKegiatanActionPerformed
-        t.stop();
-        t2.stop();
+//        t.stop();
+//        t2.stop();
         Kegiatan k = new Kegiatan();
         k.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnKegiatanActionPerformed
 
     private void btnPencarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPencarianActionPerformed
-        t.stop();
-        t2.stop();
+//        t.stop();
+//        t2.stop();
         Pencarian p = new Pencarian();
         p.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnPencarianActionPerformed
 
     private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
-        t.stop();
-        t2.stop();
+//        t.stop();
+//        t2.stop();
         Log l = new Log();
         l.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLogActionPerformed
 
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
-        t.stop();
-        t2.stop();
+//        t.stop();
+//        t2.stop();
         Login l = new Login();
         l.setVisible(true);
         this.dispose();
