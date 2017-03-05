@@ -144,28 +144,31 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        KartuTIK k = new KartuTIK();
-        String username = txtUsername.getText();
-        String password = txtPassword.getText();
-        if(!username.isEmpty()){
-            if(!password.isEmpty()){
-                if(k.Login(username, password)){
-                    if(k.tipeUser.equalsIgnoreCase("1")){
-                        MenuAdmin m = new MenuAdmin();
-                        m.setVisible(true);
-                        this.dispose();
-                    } else {
-                        
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Username atau password anda tidak ada / salah.");
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Masukkan password anda.");
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Masukkan username anda.");
-        }
+        MenuAdmin m = new MenuAdmin();
+        m.setVisible(true);
+        this.dispose();
+//        KartuTIK k = new KartuTIK();
+//        String username = txtUsername.getText();
+//        String password = txtPassword.getText();
+//        if(!username.isEmpty()){
+//            if(!password.isEmpty()){
+//                if(k.Login(username, password)){
+//                    if(k.tipeUser.equalsIgnoreCase("1")){
+//                        MenuAdmin m = new MenuAdmin();
+//                        m.setVisible(true);
+//                        this.dispose();
+//                    } else {
+//                        
+//                    }
+//                } else {
+//                    JOptionPane.showMessageDialog(this, "Username atau password anda tidak ada / salah.");
+//                }
+//            } else {
+//                JOptionPane.showMessageDialog(this, "Masukkan password anda.");
+//            }
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Masukkan username anda.");
+//        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
