@@ -25,7 +25,10 @@ public class TambahUbahTIK extends javax.swing.JFrame {
     /**
      * Creates new form TambahUbahTIK
      */
+    KartuTIK d;
+
     public TambahUbahTIK() {
+        d = new KartuTIK();
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
@@ -48,11 +51,15 @@ public class TambahUbahTIK extends javax.swing.JFrame {
         } else if (MenuTIK.tambahUbah == 2) {
             btnFoto.setEnabled(false);
             btnSimpanUbah.setText("Ubah");
-            PengisianDataLengkap();
+            PengisianDataLengkapUbah();
         } else if (MenuTIK.tambahUbah == 3) {
             btnFoto.setVisible(false);
             btnSimpanUbah.setText("Print");
+            PengisianDataLengkapCari();
+            txtFieldEnabled(false);
         }
+
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
     }
 
     public void ComboBoxTanggalBulanTahun() {
@@ -67,14 +74,19 @@ public class TambahUbahTIK extends javax.swing.JFrame {
         }
     }
 
-    public void PengisianDataLengkap() {
-        DataTIK d = new DataTIK();
-        txtNamaLengkap.setText(d.getNamalengkap());
-        txtAlias.setText(d.getAlias());
-        txtKTP.setText(d.getTglnoktp());
-        txtPasport.setText(d.getTglnopasport());
-        txtAgama.setText(d.getAgama());
-        String data[] = d.getTgllahir().split("-");
+    public static String id = "";
+
+    public void PengisianDataLengkapUbah() {
+        KartuTIK k = new KartuTIK();
+        k.AmbilDataLengkapByNamaLengkap(MenuTIK.namalengkap);
+
+        id = k.d.getId();
+        txtNamaLengkap.setText(k.d.getNamalengkap());
+        txtAlias.setText(k.d.getAlias());
+        txtKTP.setText(k.d.getTglnoktp());
+        txtPasport.setText(k.d.getTglnopasport());
+        txtAgama.setText(k.d.getAgama());
+        String data[] = k.d.getTgllahir().split("-");
         String tanggal = data[0];
         String bulan = data[1];
         String tahun = data[2];
@@ -84,89 +96,277 @@ public class TambahUbahTIK extends javax.swing.JFrame {
         cmbTanggal.getEditor().setItem(tanggal);
         cmbBulan.getEditor().setItem(bulan);
         cmbTahun.getEditor().setItem(tahun);
-        cmbTanggal.setEditable(false);
-        cmbBulan.setEditable(false);
-        cmbTahun.setEditable(false);
-        txtUmur.setText(d.getUmur());
-        txtTempatLahir.setText(d.getTempatlahir());
+        cmbTanggal.setPreferredSize(new Dimension(35, cmbTanggal.getPreferredSize().height));
+        cmbBulan.setPreferredSize(new Dimension(35, cmbBulan.getPreferredSize().height));
+        cmbTahun.setPreferredSize(new Dimension(55, cmbTahun.getPreferredSize().height));
+        txtUmur.setText(k.d.getUmur());
+        txtTempatLahir.setText(k.d.getTempatlahir());
         if (KartuTIK.tipeUser.equalsIgnoreCase("1") || KartuTIK.hakAksesUser.equalsIgnoreCase("1")) {
             //kebuka semua
         } else if (KartuTIK.tipeUser.equalsIgnoreCase("0")) {
-            if (!d.getAlamat().isEmpty()) {
+            if (!k.d.getAlamat().isEmpty()) {
                 txtAlamat.setEnabled(false);
             }
-            if (!d.getPerubahanalamat1().isEmpty()) {
+            if (!k.d.getPerubahanalamat1().isEmpty()) {
                 txtPerubahanAlamat1.setEnabled(false);
             }
-            if (!d.getPerubahanalamat2().isEmpty()) {
+            if (!k.d.getPerubahanalamat2().isEmpty()) {
                 txtPerubahanAlamat2.setEnabled(false);
             }
-            if (!d.getPerubahanalamat3().isEmpty()) {
+            if (!k.d.getPerubahanalamat3().isEmpty()) {
                 txtPerubahanAlamat3.setEnabled(false);
             }
         }
-        txtAlamat.setText(d.getAlamat());
-        txtPerubahanAlamat1.setText(d.getPerubahanalamat1());
-        txtPerubahanAlamat2.setText(d.getPerubahanalamat2());
-        txtPerubahanAlamat3.setText(d.getPerubahanalamat3());
-        txtKedudukan.setText(d.getKedudukan());
-        txtNamaBapak.setText(d.getNamabapak());
-        txtNamaIbu.setText(d.getNamaibu());
-        txtPekerjaan.setText(d.getPekerjaan());
-        txtJabatan.setText(d.getJabatan());
-        txtInstansi.setText(d.getInstansilembagakantor());
-        txtNamaIstri.setText(d.getNamaistri());
-        txtUmurIstri.setText(d.getUmuristri());
-        txtPekerjaanIstri.setText(d.getPekerjaanistri());
-        txtNamaBapakIstri.setText(d.getNamabapakistri());
-        txtUmurBapakIstri.setText(d.getUmurbapakistri());
-        txtPekerjaanBapakIstri.setText(d.getPekerjaanbapakistri());
-        txtNamaIbuIstri.setText(d.getNamaibuistri());
-        txtUmurIbuIstri.setText(d.getUmuribuistri());
-        txtPekerjaanIbuIstri.setText(d.getPekerjaanibuistri());
-        txtAlamatOrangTuaIstri.setText(d.getAlamatorgtuaistri());
-        txtTanggungan.setText(d.getTanggungan());
-        txtAlamatTanggungan.setText(d.getAlamattanggungan());
-        txtRambut.setText(d.getRambut());
-        txtMuka.setText(d.getMuka());
-        txtKulit.setText(d.getKulit());
-        txtTinggi.setText(d.getTinggi());
-        txtTandaIstimewa.setText(d.getTandaistimewa());
-        txtRumusSidikJari.setText(d.getRumussidikjari());
-        txtNamaAnak1.setText(d.getNamaanak1());
-        txtNamaAnak2.setText(d.getNamaanak2());
-        txtNamaAnak3.setText(d.getNamaanak3());
-        txtNamaAnak4.setText(d.getNamaanak4());
-        txtNamaAnak5.setText(d.getNamaanak5());
-        txtNamaAnak6.setText(d.getNamaanak6());
-        txtUmurAnak1.setText(d.getUmuranak1());
-        txtUmurAnak2.setText(d.getUmuranak2());
-        txtUmurAnak3.setText(d.getUmuranak3());
-        txtUmurAnak4.setText(d.getUmuranak4());
-        txtUmurAnak5.setText(d.getUmuranak5());
-        txtUmurAnak6.setText(d.getUmuranak6());
-        txtPekerjaanAnak1.setText(d.getPekerjaananak1());
-        txtPekerjaanAnak2.setText(d.getPekerjaananak2());
-        txtPekerjaanAnak3.setText(d.getPekerjaananak3());
-        txtPekerjaanAnak4.setText(d.getPekerjaananak4());
-        txtPekerjaanAnak5.setText(d.getPekerjaananak5());
-        txtPekerjaanAnak6.setText(d.getPekerjaananak6());
-        txtNamaSekolah1.setText(d.getNamasekolah1());
-        txtNamaSekolah2.setText(d.getNamasekolah2());
-        txtNamaSekolah3.setText(d.getNamasekolah3());
-        txtNamaSekolah4.setText(d.getNamasekolah4());
-        txtNamaSekolah5.setText(d.getNamasekolah5());
-        txtNamaSekolah6.setText(d.getNamasekolah6());
-        txtTahunLulusSekolah1.setText(d.getTahunlulussekolah1());
-        txtTahunLulusSekolah2.setText(d.getTahunlulussekolah2());
-        txtTahunLulusSekolah3.setText(d.getTahunlulussekolah3());
-        txtTahunLulusSekolah4.setText(d.getTahunlulussekolah4());
-        txtTahunLulusSekolah5.setText(d.getTahunlulussekolah5());
-        txtTahunLulusSekolah6.setText(d.getTahunlulussekolah6());
-        txtKesenanganKegemaranHobi.setText(d.getHobi());
-        txtKriminal1.setText(d.getCatatankriminal1());
-        txtKriminal2.setText(d.getCatatankriminal2());
-        txtKriminal3.setText(d.getCatatankriminal3());
+        txtAlamat.setText(k.d.getAlamat());
+        txtPerubahanAlamat1.setText(k.d.getPerubahanalamat1());
+        txtPerubahanAlamat2.setText(k.d.getPerubahanalamat2());
+        txtPerubahanAlamat3.setText(k.d.getPerubahanalamat3());
+        txtKedudukan.setText(k.d.getKedudukan());
+        txtNamaBapak.setText(k.d.getNamabapak());
+        txtNamaIbu.setText(k.d.getNamaibu());
+        txtAlamatOrangTua.setText(k.d.getAlamatorgtua());
+        txtPekerjaan.setText(k.d.getPekerjaan());
+        txtJabatan.setText(k.d.getJabatan());
+        txtInstansi.setText(k.d.getInstansilembagakantor());
+        txtNamaIstri.setText(k.d.getNamaistri());
+        txtUmurIstri.setText(k.d.getUmuristri());
+        txtPekerjaanIstri.setText(k.d.getPekerjaanistri());
+        txtNamaBapakIstri.setText(k.d.getNamabapakistri());
+        txtUmurBapakIstri.setText(k.d.getUmurbapakistri());
+        txtPekerjaanBapakIstri.setText(k.d.getPekerjaanbapakistri());
+        txtNamaIbuIstri.setText(k.d.getNamaibuistri());
+        txtUmurIbuIstri.setText(k.d.getUmuribuistri());
+        txtPekerjaanIbuIstri.setText(k.d.getPekerjaanibuistri());
+        txtAlamatOrangTuaIstri.setText(k.d.getAlamatorgtuaistri());
+        txtTanggungan.setText(k.d.getTanggungan());
+        txtAlamatTanggungan.setText(k.d.getAlamattanggungan());
+        txtRambut.setText(k.d.getRambut());
+        txtMuka.setText(k.d.getMuka());
+        txtKulit.setText(k.d.getKulit());
+        txtTinggi.setText(k.d.getTinggi());
+        txtTandaIstimewa.setText(k.d.getTandaistimewa());
+        txtRumusSidikJari.setText(k.d.getRumussidikjari());
+        txtNamaAnak1.setText(k.d.getNamaanak1());
+        txtNamaAnak2.setText(k.d.getNamaanak2());
+        txtNamaAnak3.setText(k.d.getNamaanak3());
+        txtNamaAnak4.setText(k.d.getNamaanak4());
+        txtNamaAnak5.setText(k.d.getNamaanak5());
+        txtNamaAnak6.setText(k.d.getNamaanak6());
+        txtUmurAnak1.setText(k.d.getUmuranak1());
+        txtUmurAnak2.setText(k.d.getUmuranak2());
+        txtUmurAnak3.setText(k.d.getUmuranak3());
+        txtUmurAnak4.setText(k.d.getUmuranak4());
+        txtUmurAnak5.setText(k.d.getUmuranak5());
+        txtUmurAnak6.setText(k.d.getUmuranak6());
+        txtPekerjaanAnak1.setText(k.d.getPekerjaananak1());
+        txtPekerjaanAnak2.setText(k.d.getPekerjaananak2());
+        txtPekerjaanAnak3.setText(k.d.getPekerjaananak3());
+        txtPekerjaanAnak4.setText(k.d.getPekerjaananak4());
+        txtPekerjaanAnak5.setText(k.d.getPekerjaananak5());
+        txtPekerjaanAnak6.setText(k.d.getPekerjaananak6());
+        txtNamaSekolah1.setText(k.d.getNamasekolah1());
+        txtNamaSekolah2.setText(k.d.getNamasekolah2());
+        txtNamaSekolah3.setText(k.d.getNamasekolah3());
+        txtNamaSekolah4.setText(k.d.getNamasekolah4());
+        txtNamaSekolah5.setText(k.d.getNamasekolah5());
+        txtNamaSekolah6.setText(k.d.getNamasekolah6());
+        txtTahunLulusSekolah1.setText(k.d.getTahunlulussekolah1());
+        txtTahunLulusSekolah2.setText(k.d.getTahunlulussekolah2());
+        txtTahunLulusSekolah3.setText(k.d.getTahunlulussekolah3());
+        txtTahunLulusSekolah4.setText(k.d.getTahunlulussekolah4());
+        txtTahunLulusSekolah5.setText(k.d.getTahunlulussekolah5());
+        txtTahunLulusSekolah6.setText(k.d.getTahunlulussekolah6());
+        txtKesenanganKegemaranHobi.setText(k.d.getHobi());
+        txtKriminal1.setText(k.d.getCatatankriminal1());
+        txtKriminal2.setText(k.d.getCatatankriminal2());
+        txtKriminal3.setText(k.d.getCatatankriminal3());
+        ImageIcon ii = new ImageIcon(k.d.getUrlfoto());
+        lblFoto.setIcon(ii);
+        lblFoto.setText("");
+    }
+
+    public void PengisianDataLengkapCari() {
+        KartuTIK k = new KartuTIK();
+        k.AmbilDataLengkapByKTP(Pencarian.ktp);
+
+        //id = k.d.getId();
+        txtNamaLengkap.setText(k.d.getNamalengkap());
+        txtAlias.setText(k.d.getAlias());
+        txtKTP.setText(k.d.getTglnoktp());
+        txtPasport.setText(k.d.getTglnopasport());
+        txtAgama.setText(k.d.getAgama());
+        String data[] = k.d.getTgllahir().split("-");
+        String tanggal = data[0];
+        String bulan = data[1];
+        String tahun = data[2];
+        cmbTanggal.setEditable(true);
+        cmbBulan.setEditable(true);
+        cmbTahun.setEditable(true);
+        cmbTanggal.getEditor().setItem(tanggal);
+        cmbBulan.getEditor().setItem(bulan);
+        cmbTahun.getEditor().setItem(tahun);
+        cmbTanggal.setPreferredSize(new Dimension(35, cmbTanggal.getPreferredSize().height));
+        cmbBulan.setPreferredSize(new Dimension(35, cmbBulan.getPreferredSize().height));
+        cmbTahun.setPreferredSize(new Dimension(55, cmbTahun.getPreferredSize().height));
+        txtUmur.setText(k.d.getUmur());
+        txtTempatLahir.setText(k.d.getTempatlahir());
+        if (KartuTIK.tipeUser.equalsIgnoreCase("1") || KartuTIK.hakAksesUser.equalsIgnoreCase("1")) {
+            //kebuka semua
+        } else if (KartuTIK.tipeUser.equalsIgnoreCase("0")) {
+            if (!k.d.getAlamat().isEmpty()) {
+                txtAlamat.setEnabled(false);
+            }
+            if (!k.d.getPerubahanalamat1().isEmpty()) {
+                txtPerubahanAlamat1.setEnabled(false);
+            }
+            if (!k.d.getPerubahanalamat2().isEmpty()) {
+                txtPerubahanAlamat2.setEnabled(false);
+            }
+            if (!k.d.getPerubahanalamat3().isEmpty()) {
+                txtPerubahanAlamat3.setEnabled(false);
+            }
+        }
+        txtAlamat.setText(k.d.getAlamat());
+        txtPerubahanAlamat1.setText(k.d.getPerubahanalamat1());
+        txtPerubahanAlamat2.setText(k.d.getPerubahanalamat2());
+        txtPerubahanAlamat3.setText(k.d.getPerubahanalamat3());
+        txtKedudukan.setText(k.d.getKedudukan());
+        txtNamaBapak.setText(k.d.getNamabapak());
+        txtNamaIbu.setText(k.d.getNamaibu());
+        txtPekerjaan.setText(k.d.getPekerjaan());
+        txtJabatan.setText(k.d.getJabatan());
+        txtInstansi.setText(k.d.getInstansilembagakantor());
+        txtNamaIstri.setText(k.d.getNamaistri());
+        txtUmurIstri.setText(k.d.getUmuristri());
+        txtPekerjaanIstri.setText(k.d.getPekerjaanistri());
+        txtNamaBapakIstri.setText(k.d.getNamabapakistri());
+        txtUmurBapakIstri.setText(k.d.getUmurbapakistri());
+        txtPekerjaanBapakIstri.setText(k.d.getPekerjaanbapakistri());
+        txtNamaIbuIstri.setText(k.d.getNamaibuistri());
+        txtUmurIbuIstri.setText(k.d.getUmuribuistri());
+        txtPekerjaanIbuIstri.setText(k.d.getPekerjaanibuistri());
+        txtAlamatOrangTuaIstri.setText(k.d.getAlamatorgtuaistri());
+        txtTanggungan.setText(k.d.getTanggungan());
+        txtAlamatTanggungan.setText(k.d.getAlamattanggungan());
+        txtRambut.setText(k.d.getRambut());
+        txtMuka.setText(k.d.getMuka());
+        txtKulit.setText(k.d.getKulit());
+        txtTinggi.setText(k.d.getTinggi());
+        txtTandaIstimewa.setText(k.d.getTandaistimewa());
+        txtRumusSidikJari.setText(k.d.getRumussidikjari());
+        txtNamaAnak1.setText(k.d.getNamaanak1());
+        txtNamaAnak2.setText(k.d.getNamaanak2());
+        txtNamaAnak3.setText(k.d.getNamaanak3());
+        txtNamaAnak4.setText(k.d.getNamaanak4());
+        txtNamaAnak5.setText(k.d.getNamaanak5());
+        txtNamaAnak6.setText(k.d.getNamaanak6());
+        txtUmurAnak1.setText(k.d.getUmuranak1());
+        txtUmurAnak2.setText(k.d.getUmuranak2());
+        txtUmurAnak3.setText(k.d.getUmuranak3());
+        txtUmurAnak4.setText(k.d.getUmuranak4());
+        txtUmurAnak5.setText(k.d.getUmuranak5());
+        txtUmurAnak6.setText(k.d.getUmuranak6());
+        txtPekerjaanAnak1.setText(k.d.getPekerjaananak1());
+        txtPekerjaanAnak2.setText(k.d.getPekerjaananak2());
+        txtPekerjaanAnak3.setText(k.d.getPekerjaananak3());
+        txtPekerjaanAnak4.setText(k.d.getPekerjaananak4());
+        txtPekerjaanAnak5.setText(k.d.getPekerjaananak5());
+        txtPekerjaanAnak6.setText(k.d.getPekerjaananak6());
+        txtNamaSekolah1.setText(k.d.getNamasekolah1());
+        txtNamaSekolah2.setText(k.d.getNamasekolah2());
+        txtNamaSekolah3.setText(k.d.getNamasekolah3());
+        txtNamaSekolah4.setText(k.d.getNamasekolah4());
+        txtNamaSekolah5.setText(k.d.getNamasekolah5());
+        txtNamaSekolah6.setText(k.d.getNamasekolah6());
+        txtTahunLulusSekolah1.setText(k.d.getTahunlulussekolah1());
+        txtTahunLulusSekolah2.setText(k.d.getTahunlulussekolah2());
+        txtTahunLulusSekolah3.setText(k.d.getTahunlulussekolah3());
+        txtTahunLulusSekolah4.setText(k.d.getTahunlulussekolah4());
+        txtTahunLulusSekolah5.setText(k.d.getTahunlulussekolah5());
+        txtTahunLulusSekolah6.setText(k.d.getTahunlulussekolah6());
+        txtKesenanganKegemaranHobi.setText(k.d.getHobi());
+        txtKriminal1.setText(k.d.getCatatankriminal1());
+        txtKriminal2.setText(k.d.getCatatankriminal2());
+        txtKriminal3.setText(k.d.getCatatankriminal3());
+        ImageIcon ii = new ImageIcon(Pencarian.urlfoto);
+        lblFoto.setIcon(ii);
+        lblFoto.setText("");
+    }
+
+    public void txtFieldEnabled(boolean trufal) {
+        txtNamaLengkap.setEnabled(trufal);
+        txtAlias.setEnabled(trufal);
+        txtKTP.setEnabled(trufal);
+        txtPasport.setEnabled(trufal);
+        txtAgama.setEnabled(trufal);
+        cmbTanggal.setEnabled(trufal);
+        cmbBulan.setEnabled(trufal);
+        cmbTahun.setEnabled(trufal);
+        txtUmur.setEnabled(trufal);
+        txtTempatLahir.setEnabled(trufal);
+        txtAlamat.setEnabled(trufal);
+        txtPerubahanAlamat1.setEnabled(trufal);
+        txtPerubahanAlamat2.setEnabled(trufal);
+        txtPerubahanAlamat3.setEnabled(trufal);
+        txtKedudukan.setEnabled(trufal);
+        txtNamaBapak.setEnabled(trufal);
+        txtNamaIbu.setEnabled(trufal);
+        txtAlamatOrangTua.setEnabled(trufal);
+        txtPekerjaan.setEnabled(trufal);
+        txtJabatan.setEnabled(trufal);
+        txtInstansi.setEnabled(trufal);
+        txtNamaIstri.setEnabled(trufal);
+        txtUmurIstri.setEnabled(trufal);
+        txtPekerjaanIstri.setEnabled(trufal);
+        txtNamaBapakIstri.setEnabled(trufal);
+        txtUmurBapakIstri.setEnabled(trufal);
+        txtPekerjaanBapakIstri.setEnabled(trufal);
+        txtNamaIbuIstri.setEnabled(trufal);
+        txtUmurIbuIstri.setEnabled(trufal);
+        txtPekerjaanIbuIstri.setEnabled(trufal);
+        txtAlamatOrangTuaIstri.setEnabled(trufal);
+        txtTanggungan.setEnabled(trufal);
+        txtAlamatTanggungan.setEnabled(trufal);
+        txtRambut.setEnabled(trufal);
+        txtMuka.setEnabled(trufal);
+        txtKulit.setEnabled(trufal);
+        txtTinggi.setEnabled(trufal);
+        txtTandaIstimewa.setEnabled(trufal);
+        txtRumusSidikJari.setEnabled(trufal);
+        txtNamaAnak1.setEnabled(trufal);
+        txtNamaAnak2.setEnabled(trufal);
+        txtNamaAnak3.setEnabled(trufal);
+        txtNamaAnak4.setEnabled(trufal);
+        txtNamaAnak5.setEnabled(trufal);
+        txtNamaAnak6.setEnabled(trufal);
+        txtUmurAnak1.setEnabled(trufal);
+        txtUmurAnak2.setEnabled(trufal);
+        txtUmurAnak3.setEnabled(trufal);
+        txtUmurAnak4.setEnabled(trufal);
+        txtUmurAnak5.setEnabled(trufal);
+        txtUmurAnak6.setEnabled(trufal);
+        txtPekerjaanAnak1.setEnabled(trufal);
+        txtPekerjaanAnak2.setEnabled(trufal);
+        txtPekerjaanAnak3.setEnabled(trufal);
+        txtPekerjaanAnak4.setEnabled(trufal);
+        txtPekerjaanAnak5.setEnabled(trufal);
+        txtPekerjaanAnak6.setEnabled(trufal);
+        txtNamaSekolah1.setEnabled(trufal);
+        txtNamaSekolah2.setEnabled(trufal);
+        txtNamaSekolah3.setEnabled(trufal);
+        txtNamaSekolah4.setEnabled(trufal);
+        txtNamaSekolah5.setEnabled(trufal);
+        txtNamaSekolah6.setEnabled(trufal);
+        txtTahunLulusSekolah1.setEnabled(trufal);
+        txtTahunLulusSekolah2.setEnabled(trufal);
+        txtTahunLulusSekolah3.setEnabled(trufal);
+        txtTahunLulusSekolah4.setEnabled(trufal);
+        txtTahunLulusSekolah5.setEnabled(trufal);
+        txtTahunLulusSekolah6.setEnabled(trufal);
+        txtKesenanganKegemaranHobi.setEnabled(trufal);
+        txtKriminal1.setEnabled(trufal);
+        txtKriminal2.setEnabled(trufal);
+        txtKriminal3.setEnabled(trufal);
     }
 
     /**
@@ -328,7 +528,6 @@ public class TambahUbahTIK extends javax.swing.JFrame {
         txtAlamatOrangTua = new javax.swing.JTextField();
         btnSimpanUbah = new javax.swing.JButton();
         btnKembali = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -406,6 +605,12 @@ public class TambahUbahTIK extends javax.swing.JFrame {
 
         jLabel8.setText("/");
 
+        cmbTahun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTahunActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -423,7 +628,7 @@ public class TambahUbahTIK extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbBulan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbTahun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbTahun, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
@@ -449,7 +654,7 @@ public class TambahUbahTIK extends javax.swing.JFrame {
                     .addComponent(txtUmur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbBulan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbTahun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbTahun))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -1265,7 +1470,7 @@ public class TambahUbahTIK extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jPanel1);
 
-        btnSimpanUbah.setText("Simpan / Ubah");
+        btnSimpanUbah.setText("Simpan / Ubah / Print");
         btnSimpanUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSimpanUbahActionPerformed(evt);
@@ -1276,13 +1481,6 @@ public class TambahUbahTIK extends javax.swing.JFrame {
         btnKembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKembaliActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Foto");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
             }
         });
 
@@ -1297,8 +1495,6 @@ public class TambahUbahTIK extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnKembali)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(221, 221, 221)
                         .addComponent(btnSimpanUbah, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -1310,8 +1506,7 @@ public class TambahUbahTIK extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSimpanUbah)
-                    .addComponent(btnKembali)
-                    .addComponent(jButton1))
+                    .addComponent(btnKembali))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1330,30 +1525,40 @@ public class TambahUbahTIK extends javax.swing.JFrame {
     }
     public static String extension;
     public static String nama;
-
+    boolean insertDiTekan = false;
     private void btnFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-        int result = fileChooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            extension = getFileExtension(selectedFile);
-            nama = selectedFile.getName();//"uploadfoto." + extension;
-            try {
-                Thumbnails.of(new File(selectedFile.getAbsolutePath()))
-                        .size(98, 135) // p , l
-                        .toFile(new File(System.getProperty("user.dir") + "\\src\\foto\\" + nama));
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, e);
+        if (insertDiTekan) {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+            int result = fileChooser.showOpenDialog(this);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                extension = getFileExtension(selectedFile);
+                nama = selectedFile.getName();//"uploadfoto." + extension;
+                try {
+                    Thumbnails.of(new File(selectedFile.getAbsolutePath()))
+                            .size(98, 135) // p , l
+                            .toFile(new File(System.getProperty("user.dir") + "\\src\\foto\\" + nama));
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(this, e);
+                }
+                ImageIcon ii = new ImageIcon(System.getProperty("user.dir") + "\\src\\foto\\" + nama);
+                lblFoto.setIcon(ii);
+                lblFoto.setText("");
+                directoryFoto = System.getProperty("user.dir") + "\\src\\foto\\" + nama;
+                KartuTIK d = new KartuTIK();
+                if (d.InsertFoto(this.directoryFoto, txtKTP.getText() + txtNamaLengkap.getText() + "." + this.extension, txtKTP.getText())) {
+                    JOptionPane.showMessageDialog(this, "Upload Foto (" + txtNamaLengkap.getText() + ") sukses!");
+                    MenuTIK m = new MenuTIK();
+                    m.setVisible(true);
+                    m.tambahUbah = 0;
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Upload Foto (" + txtNamaLengkap.getText() + ") gagal.");
+                }
             }
-            ImageIcon ii = new ImageIcon(System.getProperty("user.dir") + "\\src\\foto\\" + nama);
-            lblFoto.setIcon(ii);
-            lblFoto.setText("");
-            directoryFoto = System.getProperty("user.dir") + "\\src\\foto\\" + nama;
-            KartuTIK k = new KartuTIK();
-            k.sendimage(this.directoryFoto, this.nama);
-            JOptionPane.showMessageDialog(this, "SUKSES");
-
+        } else {
+            JOptionPane.showMessageDialog(this, "Mohon mengisikan data-data secara lengkap dahulu dan tekan tombol Simpan lalu tekan tombol ini kembali. ");
         }
     }//GEN-LAST:event_btnFotoActionPerformed
 
@@ -1375,9 +1580,19 @@ public class TambahUbahTIK extends javax.swing.JFrame {
 
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
         MenuTIK m = new MenuTIK();
-        m.setVisible(true);
-        m.tambahUbah = 0;
-        this.dispose();
+        if (m.tambahUbah == 3) {
+            Pencarian p = new Pencarian();
+            p.setVisible(true);
+            m.tambahUbah = 0;
+            this.dispose();
+        } else {
+            int val = JOptionPane.showConfirmDialog(this, "Apa anda yakin untuk keluar?", "Peringatan!", JOptionPane.YES_NO_OPTION);
+            if (val == JOptionPane.YES_OPTION) {
+                m.setVisible(true);
+                m.tambahUbah = 0;
+                this.dispose();
+            }
+        }
     }//GEN-LAST:event_btnKembaliActionPerformed
 
     private void btnSimpanUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanUbahActionPerformed
@@ -1401,15 +1616,17 @@ public class TambahUbahTIK extends javax.swing.JFrame {
                 int tahunlulus4 = Integer.parseInt(txtTahunLulusSekolah4.getText());
                 int tahunlulus5 = Integer.parseInt(txtTahunLulusSekolah5.getText());
                 int tahunlulus6 = Integer.parseInt(txtTahunLulusSekolah6.getText());
-                */
-                
-                KartuTIK d = new KartuTIK();
+                 */
+
+                //KartuTIK d = new KartuTIK();
                 d.d.setNamalengkap(txtNamaLengkap.getText());
                 d.d.setAlias(txtAlias.getText());
                 d.d.setTglnoktp(txtKTP.getText());
                 d.d.setTglnopasport(txtPasport.getText());
                 d.d.setAgama(txtAgama.getText());
-                System.out.println(d.d.getNamalengkap() + d.d.getAlias());
+                cmbTanggal.setEditable(true);
+                cmbBulan.setEditable(true);
+                cmbTahun.setEditable(true);
                 String tanggal = cmbTanggal.getEditor().getItem().toString();
                 String bulan = cmbBulan.getEditor().getItem().toString();
                 String tahun = cmbTahun.getEditor().getItem().toString();
@@ -1424,6 +1641,7 @@ public class TambahUbahTIK extends javax.swing.JFrame {
                 d.d.setKedudukan(txtKedudukan.getText());
                 d.d.setNamabapak(txtNamaBapak.getText());
                 d.d.setNamaibu(txtNamaIbu.getText());
+                d.d.setAlamatorgtua(txtAlamatOrangTua.getText());
                 d.d.setPekerjaan(txtPekerjaan.getText());
                 d.d.setJabatan(txtJabatan.getText());
                 d.d.setInstansilembagakantor(txtInstansi.getText());
@@ -1479,12 +1697,130 @@ public class TambahUbahTIK extends javax.swing.JFrame {
                 d.d.setCatatankriminal1(txtKriminal1.getText());
                 d.d.setCatatankriminal2(txtKriminal2.getText());
                 d.d.setCatatankriminal3(txtKriminal3.getText());
-                
+
                 int val = JOptionPane.showConfirmDialog(this, "Apa anda sudah yakin untuk menambah data?", "Peringatan!", JOptionPane.YES_NO_OPTION);
                 if (val == JOptionPane.YES_OPTION) {
-                    /*
-                    if (k.InsertDataTIK(txtNamaLengkap.getText())) {
-                        JOptionPane.showMessageDialog(this, "Penambahan data sukses!");
+                    if (d.InsertDataTIK()) {
+                        JOptionPane.showMessageDialog(this, "Penambahan data sukses! Sekarang pilihlah foto untuk di upload!");
+                        btnFoto.setEnabled(true);
+                        txtFieldEnabled(false);
+                        btnSimpanUbah.setEnabled(false);
+                        insertDiTekan = true;
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Penambahan data gagal.");
+                    }
+                } else {
+                    //nothing happens
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Pengisian (Umur, Tinggi, Tahun lulus) harus berupa angka.");
+            }
+        } else if (MenuTIK.tambahUbah == 2) {
+            try {
+                /*
+                int umur = Integer.parseInt(txtUmur.getText());
+                int umurIstri = Integer.parseInt(txtUmurIstri.getText());
+                int umurBapakIstri = Integer.parseInt(txtUmurBapakIstri.getText());
+                int umurIbuIstri = Integer.parseInt(txtUmurIbuIstri.getText());
+                int tinggi = Integer.parseInt(txtTinggi.getText());
+                int umurAnak1 = Integer.parseInt(txtUmurAnak1.getText());
+                int umurAnak2 = Integer.parseInt(txtUmurAnak2.getText());
+                int umurAnak3 = Integer.parseInt(txtUmurAnak3.getText());
+                int umurAnak4 = Integer.parseInt(txtUmurAnak4.getText());
+                int umurAnak5 = Integer.parseInt(txtUmurAnak5.getText());
+                int umurAnak6 = Integer.parseInt(txtUmurAnak6.getText());
+                int tahunlulus1 = Integer.parseInt(txtTahunLulusSekolah1.getText());
+                int tahunlulus2 = Integer.parseInt(txtTahunLulusSekolah2.getText());
+                int tahunlulus3 = Integer.parseInt(txtTahunLulusSekolah3.getText());
+                int tahunlulus4 = Integer.parseInt(txtTahunLulusSekolah4.getText());
+                int tahunlulus5 = Integer.parseInt(txtTahunLulusSekolah5.getText());
+                int tahunlulus6 = Integer.parseInt(txtTahunLulusSekolah6.getText());
+                 */
+
+                KartuTIK d = new KartuTIK();
+                d.d.setNamalengkap(txtNamaLengkap.getText());
+                d.d.setAlias(txtAlias.getText());
+                d.d.setTglnoktp(txtKTP.getText());
+                d.d.setTglnopasport(txtPasport.getText());
+                d.d.setAgama(txtAgama.getText());
+                cmbTanggal.setEditable(true);
+                cmbBulan.setEditable(true);
+                cmbTahun.setEditable(true);
+                String tanggal = cmbTanggal.getEditor().getItem().toString();
+                String bulan = cmbBulan.getEditor().getItem().toString();
+                String tahun = cmbTahun.getEditor().getItem().toString();
+                String tgllahir = tanggal + "-" + bulan + "-" + tahun;
+                d.d.setTgllahir(tgllahir);
+                d.d.setUmur(txtUmur.getText());
+                d.d.setTempatlahir(txtTempatLahir.getText());
+                d.d.setAlamat(txtAlamat.getText());
+                d.d.setPerubahanalamat1(txtPerubahanAlamat1.getText());
+                d.d.setPerubahanalamat2(txtPerubahanAlamat2.getText());
+                d.d.setPerubahanalamat3(txtPerubahanAlamat3.getText());
+                d.d.setKedudukan(txtKedudukan.getText());
+                d.d.setNamabapak(txtNamaBapak.getText());
+                d.d.setNamaibu(txtNamaIbu.getText());
+                d.d.setAlamatorgtua(txtAlamatOrangTua.getText());
+                d.d.setPekerjaan(txtPekerjaan.getText());
+                d.d.setJabatan(txtJabatan.getText());
+                d.d.setInstansilembagakantor(txtInstansi.getText());
+                d.d.setNamaistri(txtNamaIstri.getText());
+                d.d.setUmuristri(txtUmurIstri.getText());
+                d.d.setPekerjaanistri(txtPekerjaanIstri.getText());
+                d.d.setNamabapakistri(txtNamaBapakIstri.getText());
+                d.d.setUmurbapakistri(txtUmurBapakIstri.getText());
+                d.d.setPekerjaanbapakistri(txtPekerjaanBapakIstri.getText());
+                d.d.setNamaibuistri(txtNamaIbuIstri.getText());
+                d.d.setUmuribuistri(txtUmurIbuIstri.getText());
+                d.d.setPekerjaanibuistri(txtPekerjaanIbuIstri.getText());
+                d.d.setAlamatorgtuaistri(txtAlamatOrangTuaIstri.getText());
+                d.d.setTanggungan(txtTanggungan.getText());
+                d.d.setAlamattanggungan(txtAlamatTanggungan.getText());
+                d.d.setRambut(txtRambut.getText());
+                d.d.setMuka(txtMuka.getText());
+                d.d.setKulit(txtKulit.getText());
+                d.d.setTinggi(txtTinggi.getText());
+                d.d.setTandaistimewa(txtTandaIstimewa.getText());
+                d.d.setRumussidikjari(txtRumusSidikJari.getText());
+                d.d.setNamaanak1(txtNamaAnak1.getText());
+                d.d.setNamaanak2(txtNamaAnak2.getText());
+                d.d.setNamaanak3(txtNamaAnak3.getText());
+                d.d.setNamaanak4(txtNamaAnak4.getText());
+                d.d.setNamaanak5(txtNamaAnak5.getText());
+                d.d.setNamaanak6(txtNamaAnak6.getText());
+                d.d.setUmuranak1(txtUmurAnak1.getText());
+                d.d.setUmuranak2(txtUmurAnak2.getText());
+                d.d.setUmuranak3(txtUmurAnak3.getText());
+                d.d.setUmuranak4(txtUmurAnak4.getText());
+                d.d.setUmuranak5(txtUmurAnak5.getText());
+                d.d.setUmuranak6(txtUmurAnak6.getText());
+                d.d.setPekerjaananak1(txtPekerjaanAnak1.getText());
+                d.d.setPekerjaananak2(txtPekerjaanAnak2.getText());
+                d.d.setPekerjaananak3(txtPekerjaanAnak3.getText());
+                d.d.setPekerjaananak4(txtPekerjaanAnak4.getText());
+                d.d.setPekerjaananak5(txtPekerjaanAnak5.getText());
+                d.d.setPekerjaananak6(txtPekerjaanAnak6.getText());
+                d.d.setNamasekolah1(txtNamaSekolah1.getText());
+                d.d.setNamasekolah2(txtNamaSekolah2.getText());
+                d.d.setNamasekolah3(txtNamaSekolah3.getText());
+                d.d.setNamasekolah4(txtNamaSekolah4.getText());
+                d.d.setNamasekolah5(txtNamaSekolah5.getText());
+                d.d.setNamasekolah6(txtNamaSekolah6.getText());
+                d.d.setTahunlulussekolah1(txtTahunLulusSekolah1.getText());
+                d.d.setTahunlulussekolah2(txtTahunLulusSekolah2.getText());
+                d.d.setTahunlulussekolah3(txtTahunLulusSekolah3.getText());
+                d.d.setTahunlulussekolah4(txtTahunLulusSekolah4.getText());
+                d.d.setTahunlulussekolah5(txtTahunLulusSekolah5.getText());
+                d.d.setTahunlulussekolah6(txtTahunLulusSekolah6.getText());
+                d.d.setHobi(txtKesenanganKegemaranHobi.getText());
+                d.d.setCatatankriminal1(txtKriminal1.getText());
+                d.d.setCatatankriminal2(txtKriminal2.getText());
+                d.d.setCatatankriminal3(txtKriminal3.getText());
+
+                int val = JOptionPane.showConfirmDialog(this, "Apa anda sudah yakin untuk merubah data?", "Peringatan!", JOptionPane.YES_NO_OPTION);
+                if (val == JOptionPane.YES_OPTION) {
+                    if (d.UpdateDataTIK(this.id)) {
+                        JOptionPane.showMessageDialog(this, "Perubahan data milik " + d.d.getNamalengkap() + " sukses!");
                         MenuTIK m = new MenuTIK();
                         m.setVisible(true);
                         m.tambahUbah = 0;
@@ -1493,21 +1829,34 @@ public class TambahUbahTIK extends javax.swing.JFrame {
                     } else {
                         JOptionPane.showMessageDialog(this, "Penambahan data gagal.");
                     }
-                    */
                 } else {
                     //nothing happens
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Pengisian (Umur, Tinggi, Tahun lulus) harus berupa angka.");
             }
-        } else if (MenuTIK.tambahUbah == 2) {
+        } else if (MenuTIK.tambahUbah == 3) {
+            int val = JOptionPane.showConfirmDialog(this, "Apa anda sudah yakin akan Print data milik " + d.d.getNamalengkap() + " ?", "Peringatan!", JOptionPane.YES_NO_OPTION);
+            if (val == JOptionPane.YES_OPTION) {
+                if (d.PrintDataTIK(d.d.getNamalengkap())) {
+                    JOptionPane.showMessageDialog(this, "Print data milik " + d.d.getNamalengkap() + " berhasil dilaksanakan!");
+                    Pencarian p = new Pencarian();
+                    p.setVisible(true);
+                    MenuTIK.tambahUbah = 0;
+                    this.dispose();
 
+                } else {
+                    JOptionPane.showMessageDialog(this, "Print data gagal.");
+                }
+            } else {
+                //nothing happens
+            }
         }
     }//GEN-LAST:event_btnSimpanUbahActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void cmbTahunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTahunActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTahunActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1551,7 +1900,6 @@ public class TambahUbahTIK extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbBulan;
     private javax.swing.JComboBox<String> cmbTahun;
     private javax.swing.JComboBox<String> cmbTanggal;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

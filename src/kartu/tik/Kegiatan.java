@@ -22,6 +22,8 @@ public class Kegiatan extends javax.swing.JFrame {
     /**
      * Creates new form Kegiatan
      */
+    KartuTIK k;
+
     public Kegiatan() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -37,6 +39,8 @@ public class Kegiatan extends javax.swing.JFrame {
         int dx = centerPoint.x - windowSize.width / 2;
         int dy = centerPoint.y - windowSize.height / 2;
         setLocation(dx, dy);
+
+        k = new KartuTIK();
     }
 
     /**
@@ -54,7 +58,7 @@ public class Kegiatan extends javax.swing.JFrame {
         btnSimpan = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
-        txtNoInduk = new javax.swing.JTextField();
+        txtKTP = new javax.swing.JTextField();
         btnCari = new javax.swing.JButton();
         txtKegiatan = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -92,16 +96,16 @@ public class Kegiatan extends javax.swing.JFrame {
             }
         });
 
-        txtNoInduk.addInputMethodListener(new java.awt.event.InputMethodListener() {
+        txtKTP.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                txtNoIndukInputMethodTextChanged(evt);
+                txtKTPInputMethodTextChanged(evt);
             }
         });
-        txtNoInduk.addActionListener(new java.awt.event.ActionListener() {
+        txtKTP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNoIndukActionPerformed(evt);
+                txtKTPActionPerformed(evt);
             }
         });
 
@@ -116,7 +120,7 @@ public class Kegiatan extends javax.swing.JFrame {
 
         jLabel4.setText("Tanggal :");
 
-        cmbTanggal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        cmbTanggal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
         cmbBulan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
 
@@ -153,7 +157,7 @@ public class Kegiatan extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtNoInduk, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtKTP, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnCari)
                                 .addGap(30, 30, 30)
@@ -169,7 +173,7 @@ public class Kegiatan extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtNoInduk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtKTP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(txtNama)
                     .addComponent(btnCari))
@@ -220,53 +224,52 @@ public class Kegiatan extends javax.swing.JFrame {
             cmbTahun.setEditable(false);
         }
     }//GEN-LAST:event_chkTodayActionPerformed
-    boolean ditekan = false;
+
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        /*ProgramPendataan pp = new ProgramPendataan();
-        String noinduk = txtNoInduk.getText();
-        String nama = txtNama.getText();
         String kegiatan = txtKegiatan.getText();
-        String tanggal = "";
-        if (chkToday.isSelected()) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            Date d = new Date();
-            String tanggalhariini = sdf.format(d);
-            String hari = tanggalhariini.substring(0, 2);
-            String bulan = tanggalhariini.substring(3, 5);
-            String tahun = tanggalhariini.substring(6, 10);
-            tanggal = hari + "-" + bulan + "-" + tahun;
-        } else {
-            tanggal = cmbTanggal.getSelectedItem() + "-" + cmbBulan.getSelectedItem() + "-" + cmbTahun.getSelectedItem();
-        }
-        if (!txtNoInduk.getText().isEmpty()) {
-            if (!txtKegiatan.getText().isEmpty()) {
-                int reply = JOptionPane.showConfirmDialog(this, "No Induk : " + noinduk + " , " + nama + "\nKegiatan : " + kegiatan + "\nTanggal : " + tanggal, "Anda yakin?", JOptionPane.YES_NO_OPTION);
-                if (reply == JOptionPane.YES_OPTION) {
-                    if (pp.InsertKegiatan(noinduk, kegiatan, tanggal)) {
-                        JOptionPane.showMessageDialog(this, "Sukses");
-                        txtNoInduk.setText("");
-                        txtNama.setText("Masukkan No KTP.");
+        String waktu, tanggal, bulan, tahun;
+        cmbTanggal.setEditable(true);
+        cmbBulan.setEditable(true);
+        cmbTahun.setEditable(true);
+        tanggal = cmbTanggal.getEditor().getItem().toString();
+        bulan = cmbBulan.getEditor().getItem().toString();
+        tahun = cmbTahun.getEditor().getItem().toString();
+        waktu = tanggal + "-" + bulan + "-" + tahun;
+        if (!kegiatan.isEmpty()) {
+            int reply = JOptionPane.showConfirmDialog(this, "Apa anda yakin untuk menginput data kegiatan?", "Peringatan", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                if (k.InsertKegiatan(k.d.getId(), kegiatan, waktu)) {
+                    int reply2 = JOptionPane.showConfirmDialog(this, "Input data kegiatan berhasil! Apa anda ingin menginput kegiatan yang lain?", "Informasi", JOptionPane.YES_NO_OPTION);
+                    if (reply2 == JOptionPane.YES_OPTION) {
                         txtKegiatan.setText("");
-                        txtNoInduk.setEnabled(true);
-                        btnCari.setText("Cari");
-                        ditekan = false;
+                        cmbTanggal.setEditable(false);
+                        cmbBulan.setEditable(false);
+                        cmbTahun.setEditable(false);
+                        chkToday.setSelected(false);
                     } else {
-                        JOptionPane.showMessageDialog(this, "Gagal");
+                        if (k.tipeUser.equalsIgnoreCase("1")) {
+                            MenuAdmin f = new MenuAdmin();
+                            f.setVisible(true);
+                            this.dispose();
+                        } else {
+
+                        }
                     }
                 } else {
-
+                    JOptionPane.showMessageDialog(this, "Input data kegiatan gagal.");
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Masukkan kegiatan yang dilakukan.", "Peringatan", JOptionPane.OK_OPTION);
+                cmbTanggal.setEditable(false);
+                cmbBulan.setEditable(false);
+                cmbTahun.setEditable(false);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Masukkan no induk.", "Peringatan", JOptionPane.OK_OPTION);
-        }*/
+            JOptionPane.showMessageDialog(this, "Masukkan data kegiatan!");
+        }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        KartuTIK k = new KartuTIK();
-        if (!txtNoInduk.getText().isEmpty() || !txtKegiatan.getText().isEmpty()) {
+        if (!txtKTP.getText().isEmpty() || !txtKegiatan.getText().isEmpty()) {
             int reply = JOptionPane.showConfirmDialog(this, "Apa anda yakin untuk membatalkan?", "Peringatan", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
                 if (k.tipeUser.equalsIgnoreCase("1")) {
@@ -274,7 +277,7 @@ public class Kegiatan extends javax.swing.JFrame {
                     f.setVisible(true);
                     this.dispose();
                 } else {
-                    
+
                 }
             } else {
 
@@ -282,50 +285,44 @@ public class Kegiatan extends javax.swing.JFrame {
         } else {
             if (k.tipeUser.equalsIgnoreCase("1")) {
                 MenuAdmin f = new MenuAdmin();
-                    f.setVisible(true);
-                    this.dispose();
+                f.setVisible(true);
+                this.dispose();
             } else {
-                
+
             }
         }
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void txtNoIndukInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtNoIndukInputMethodTextChanged
+    private void txtKTPInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtKTPInputMethodTextChanged
 
-    }//GEN-LAST:event_txtNoIndukInputMethodTextChanged
+    }//GEN-LAST:event_txtKTPInputMethodTextChanged
 
-    private void txtNoIndukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoIndukActionPerformed
+    private void txtKTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKTPActionPerformed
         btnCariActionPerformed(evt);
-    }//GEN-LAST:event_txtNoIndukActionPerformed
-
+    }//GEN-LAST:event_txtKTPActionPerformed
+    boolean ditekan = false;
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-        /*ProgramPendataan pp = new ProgramPendataan();
+        KartuTIK k = new KartuTIK();
         if (!ditekan) {
-            if (!txtNoInduk.getText().isEmpty()) {
-                String noinduk = txtNoInduk.getText();
-                if (txtNoInduk.getText().isEmpty()) {
-                    txtNama.setText("Masukkan No Induk.");
+            if (!txtKTP.getText().isEmpty()) {
+                String ktp = txtKTP.getText();
+                if (k.AmbilDataTIKByKTP(ktp)) {
+                    txtNama.setText(k.d.getNamalengkap());
+
+                    ditekan = true;
+                    btnCari.setText("Ganti?");
+                    txtKTP.setEnabled(false);
                 } else {
-                    String data = pp.AmbilDataHakAkses(noinduk);
-                    if (!data.equalsIgnoreCase("")) {
-                        String[] partData = data.split(",");
-                        String nama = partData[0];
-                        txtNama.setText(nama);
-                        ditekan = true;
-                        btnCari.setText("Ganti?");
-                        txtNoInduk.setEnabled(false);
-                    } else {
-                        JOptionPane.showConfirmDialog(this, "No induk salah / tidak ada.");
-                    }
+                    JOptionPane.showMessageDialog(this, "No KTP salah / tidak ada.");
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Masukkan No Induk.");
+                JOptionPane.showMessageDialog(this, "Masukkan No KTP.");
             }
         } else {
-            txtNoInduk.setEnabled(true);
+            txtKTP.setEnabled(true);
             btnCari.setText("Cari");
             ditekan = false;
-        }*/
+        }
     }//GEN-LAST:event_btnCariActionPerformed
 
     /**
@@ -375,8 +372,8 @@ public class Kegiatan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField txtKTP;
     private javax.swing.JTextField txtKegiatan;
     private javax.swing.JLabel txtNama;
-    private javax.swing.JTextField txtNoInduk;
     // End of variables declaration//GEN-END:variables
 }

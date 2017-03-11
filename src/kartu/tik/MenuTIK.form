@@ -111,6 +111,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Perbarui Data"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRefreshActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -124,7 +127,7 @@
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="6" rowCount="4">
                 <Column editable="true" title="Nama Lengkap" type="java.lang.Object">
-                  <Data value="Erwin kkkkk"/>
+                  <Data value="Erwin Kurniawan Adidharma"/>
                   <Data value="null"/>
                   <Data value="null"/>
                   <Data value="null"/>

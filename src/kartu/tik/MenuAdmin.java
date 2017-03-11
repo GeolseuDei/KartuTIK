@@ -116,6 +116,8 @@ public class MenuAdmin extends javax.swing.JFrame {
         lblJam.setText("00:00:00");
 
         btnTIK.setText("Data TIK");
+        btnTIK.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTIK.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnTIK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTIKActionPerformed(evt);
@@ -123,6 +125,8 @@ public class MenuAdmin extends javax.swing.JFrame {
         });
 
         btnPencarian.setText("Pencarian");
+        btnPencarian.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPencarian.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnPencarian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPencarianActionPerformed(evt);
@@ -130,6 +134,8 @@ public class MenuAdmin extends javax.swing.JFrame {
         });
 
         btnKegiatan.setText("Kegiatan");
+        btnKegiatan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnKegiatan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnKegiatan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKegiatanActionPerformed(evt);
@@ -137,6 +143,8 @@ public class MenuAdmin extends javax.swing.JFrame {
         });
 
         btnLog.setText("Riwayat Sistem");
+        btnLog.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLog.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogActionPerformed(evt);
@@ -144,6 +152,8 @@ public class MenuAdmin extends javax.swing.JFrame {
         });
 
         btnKeluar.setText("Keluar");
+        btnKeluar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnKeluar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKeluarActionPerformed(evt);
@@ -204,10 +214,10 @@ public class MenuAdmin extends javax.swing.JFrame {
                             .addComponent(btnTIK, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnPencarian, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnKeluar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnLog, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                            .addComponent(btnPencarian, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -228,9 +238,9 @@ public class MenuAdmin extends javax.swing.JFrame {
                         .addComponent(btnKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnPencarian, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -8,8 +8,10 @@ package kartu.tik;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -35,6 +37,25 @@ public class MenuTIK extends javax.swing.JFrame {
         int dx = centerPoint.x - windowSize.width / 2;
         int dy = centerPoint.y - windowSize.height / 2;
         setLocation(dx, dy);
+
+        LoadTabelDataTIK();
+    }
+
+    private void LoadTabelDataTIK() {
+        KartuTIK k = new KartuTIK();
+        ArrayList<DataTIK> list = new ArrayList<>(k.AmbilDataTabelTIK());
+        DefaultTableModel model = (DefaultTableModel) tabelTIK.getModel();
+        model.setRowCount(0);
+        Object rowData[] = new Object[6];
+        for (int i = 0; i < list.size(); i++) {
+            rowData[0] = list.get(i).getNamalengkap();
+            rowData[1] = list.get(i).getAlias();
+            rowData[2] = list.get(i).getTglnoktp();
+            rowData[3] = list.get(i).getAgama();
+            rowData[4] = list.get(i).getTgllahir();
+            rowData[5] = list.get(i).getTempatlahir();
+            model.addRow(rowData);
+        }
     }
 
     /**
@@ -88,10 +109,15 @@ public class MenuTIK extends javax.swing.JFrame {
         });
 
         btnRefresh.setText("Perbarui Data");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
 
         tabelTIK.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Erwin kkkkk", "Erwin", "3578241911950001", "Konghucu", "11-11-1111", null},
+                {"Erwin Kurniawan Adidharma", "Erwin", "3578241911950001", "Konghucu", "11-11-1111", null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
@@ -169,15 +195,14 @@ public class MenuTIK extends javax.swing.JFrame {
         t.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTambahActionPerformed
-
+    public static String namalengkap = "";
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
         KartuTIK k = new KartuTIK();
         if (k.tipeUser.equalsIgnoreCase("1") || k.hakAksesUser.equalsIgnoreCase("1")) {
             tambahUbah = 2;
             int row = tabelTIK.getSelectedRow();
             if (row >= 0) {
-                String namaLengkap = tabelTIK.getValueAt(row, 0).toString();
-                k.AmbilDataLengkap(namaLengkap);
+                namalengkap = tabelTIK.getValueAt(row, 0).toString();
                 TambahUbahTIK t = new TambahUbahTIK();
                 t.setVisible(true);
                 this.dispose();
@@ -195,10 +220,11 @@ public class MenuTIK extends javax.swing.JFrame {
             int row = tabelTIK.getSelectedRow();
             if (row >= 0) {
                 String namaLengkap = tabelTIK.getValueAt(row, 0).toString();
-                int val = JOptionPane.showConfirmDialog(this, "Apa anda yakin akan menghapus data milik " + namaLengkap + " ?");
+                int val = JOptionPane.showConfirmDialog(this, "Apa anda yakin akan menghapus data milik " + namaLengkap + " ?", "Peringatan!", JOptionPane.YES_NO_OPTION);
                 if (val == JOptionPane.YES_OPTION) {
                     if (k.DeleteDataTIK(namaLengkap)) {
                         JOptionPane.showMessageDialog(this, "Data milik " + namaLengkap + " berhasil di hapus.");
+                        LoadTabelDataTIK();
                     } else {
                         JOptionPane.showMessageDialog(this, "Penghapusan data gagal.");
                     }
@@ -212,6 +238,10 @@ public class MenuTIK extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Hanya admin / member dengan hak akses spesial yang dapat menggunakan fitur ubah data.");
         }
     }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        LoadTabelDataTIK();
+    }//GEN-LAST:event_btnRefreshActionPerformed
 
     /**
      * @param args the command line arguments

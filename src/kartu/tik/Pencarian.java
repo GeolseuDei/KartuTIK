@@ -8,7 +8,11 @@ package kartu.tik;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -49,9 +53,9 @@ public class Pencarian extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtNoInduk = new javax.swing.JTextField();
+        txtNoKTP = new javax.swing.JTextField();
         btnCari = new javax.swing.JButton();
-        txtFoto = new javax.swing.JLabel();
+        lblFoto = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -59,14 +63,14 @@ public class Pencarian extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        lblNoInduk = new javax.swing.JLabel();
+        lblNoKTP = new javax.swing.JLabel();
         lblNama = new javax.swing.JLabel();
         lblAlias = new javax.swing.JLabel();
-        lblAlamat = new javax.swing.JLabel();
-        lblJenisKelamin = new javax.swing.JLabel();
+        lblAgama = new javax.swing.JLabel();
         lblTanggalLahir = new javax.swing.JLabel();
+        lblTempatLahir = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        btnDataLengkap = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelKegiatan = new javax.swing.JTable();
@@ -80,9 +84,9 @@ public class Pencarian extends javax.swing.JFrame {
 
         jLabel1.setText("No. KTP : ");
 
-        txtNoInduk.addActionListener(new java.awt.event.ActionListener() {
+        txtNoKTP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNoIndukActionPerformed(evt);
+                txtNoKTPActionPerformed(evt);
             }
         });
 
@@ -101,7 +105,7 @@ public class Pencarian extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtNoInduk, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNoKTP, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCari, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
                 .addContainerGap())
@@ -112,13 +116,13 @@ public class Pencarian extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtNoInduk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNoKTP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCari))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        txtFoto.setText("foto");
-        txtFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblFoto.setText("foto");
+        lblFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -126,25 +130,25 @@ public class Pencarian extends javax.swing.JFrame {
 
         jLabel3.setText("Alias :");
 
-        jLabel4.setText("Alamat :");
+        jLabel4.setText("Agama :");
 
-        jLabel6.setText("Agama :");
+        jLabel6.setText("Tanggal Lahir :");
 
-        jLabel7.setText("Tanggal Lahir :");
+        jLabel7.setText("Tempat Lahir :");
 
         jLabel8.setText("No. KTP :");
 
-        lblNoInduk.setText("-");
+        lblNoKTP.setText("-");
 
         lblNama.setText("-");
 
         lblAlias.setText("-");
 
-        lblAlamat.setText("-");
-
-        lblJenisKelamin.setText("-");
+        lblAgama.setText("-");
 
         lblTanggalLahir.setText("-");
+
+        lblTempatLahir.setText("-");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -161,12 +165,12 @@ public class Pencarian extends javax.swing.JFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNoInduk)
+                    .addComponent(lblNoKTP)
                     .addComponent(lblNama)
                     .addComponent(lblAlias)
-                    .addComponent(lblAlamat)
-                    .addComponent(lblJenisKelamin)
-                    .addComponent(lblTanggalLahir))
+                    .addComponent(lblAgama)
+                    .addComponent(lblTanggalLahir)
+                    .addComponent(lblTempatLahir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -175,7 +179,7 @@ public class Pencarian extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(lblNoInduk))
+                    .addComponent(lblNoKTP))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -187,15 +191,15 @@ public class Pencarian extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(lblAlamat))
+                    .addComponent(lblAgama))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(lblJenisKelamin))
+                    .addComponent(lblTanggalLahir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(lblTanggalLahir))
+                    .addComponent(lblTempatLahir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -206,7 +210,12 @@ public class Pencarian extends javax.swing.JFrame {
             }
         });
 
-        jButton9.setText("Lihat data secara lengkap");
+        btnDataLengkap.setText("Lihat data secara lengkap");
+        btnDataLengkap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDataLengkapActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -218,13 +227,13 @@ public class Pencarian extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(0, 0, Short.MAX_VALUE)
-                            .addComponent(jButton9)
+                            .addComponent(btnDataLengkap)
                             .addGap(101, 101, 101)
                             .addComponent(btnBack))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGap(18, 18, 18)
-                            .addComponent(txtFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -239,10 +248,10 @@ public class Pencarian extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton9)
+                    .addComponent(btnDataLengkap)
                     .addComponent(btnBack))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
@@ -268,6 +277,10 @@ public class Pencarian extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tabelKegiatan);
+        if (tabelKegiatan.getColumnModel().getColumnCount() > 0) {
+            tabelKegiatan.getColumnModel().getColumn(1).setMinWidth(80);
+            tabelKegiatan.getColumnModel().getColumn(1).setMaxWidth(80);
+        }
 
         lblNamaTabKegiatan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNamaTabKegiatan.setText("Masukkan No KTP");
@@ -315,12 +328,55 @@ public class Pencarian extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNoIndukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoIndukActionPerformed
+    private void txtNoKTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoKTPActionPerformed
         btnCariActionPerformed(evt);
-    }//GEN-LAST:event_txtNoIndukActionPerformed
+    }//GEN-LAST:event_txtNoKTPActionPerformed
 
+    static String urlfoto = "";
+    boolean diTekan = false;
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+        if (!diTekan) {
+            if (!txtNoKTP.getText().isEmpty() || !txtNoKTP.getText().equals("")) {
+                KartuTIK k = new KartuTIK();
+                String ktp = txtNoKTP.getText();
+                if (k.AmbilDataTIKByKTP(ktp)) {
+                    lblNoKTP.setText(k.d.getTglnoktp());
+                    lblNama.setText(k.d.getNamalengkap());
+                    lblAlias.setText(k.d.getAlias());
+                    lblAgama.setText(k.d.getAgama());
+                    lblTanggalLahir.setText(k.d.getTgllahir());
+                    lblTempatLahir.setText(k.d.getTempatlahir());
+                    lblNamaTabKegiatan.setText(lblNama.getText());
 
+                    ArrayList<classKegiatan> list = new ArrayList<>(k.AmbilDataTabelKegiatan(k.d.getId()));
+                    DefaultTableModel model = (DefaultTableModel) tabelKegiatan.getModel();
+                    model.setRowCount(0);
+                    Object rowData[] = new Object[2];
+                    for (int i = 0; i < list.size(); i++) {
+                        rowData[0] = list.get(i).getNamakegiatan();
+                        rowData[1] = list.get(i).getTanggal();
+                        model.addRow(rowData);
+                    }
+                    tabelKegiatan.setModel(model);
+                    ImageIcon ii = new ImageIcon(k.d.getUrlfoto());
+                    lblFoto.setIcon(ii);
+                    lblFoto.setText("");
+                    this.urlfoto = k.d.getUrlfoto();
+
+                    diTekan = true;
+                    txtNoKTP.setEnabled(false);
+                    btnCari.setText("Ganti?");
+                } else {
+                    JOptionPane.showMessageDialog(this, "No KTP tidak ditemukan.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Masukkan No KTP");
+            }
+        } else {
+            diTekan = false;
+            txtNoKTP.setEnabled(true);
+            btnCari.setText("Cari");
+        }
     }//GEN-LAST:event_btnCariActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -333,6 +389,18 @@ public class Pencarian extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_btnBackActionPerformed
+    public static String ktp = "";
+    private void btnDataLengkapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDataLengkapActionPerformed
+        if (diTekan) {
+            ktp = lblNoKTP.getText();
+            MenuTIK.tambahUbah = 3;
+            TambahUbahTIK t = new TambahUbahTIK();
+            t.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Tekan tombol 'Cari' untuk memastikan data yang dicari benar.");
+        }
+    }//GEN-LAST:event_btnDataLengkapActionPerformed
 
     /**
      * @param args the command line arguments
@@ -372,7 +440,7 @@ public class Pencarian extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCari;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton btnDataLengkap;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -386,15 +454,15 @@ public class Pencarian extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLabel lblAlamat;
+    private javax.swing.JLabel lblAgama;
     private javax.swing.JLabel lblAlias;
-    private javax.swing.JLabel lblJenisKelamin;
+    private javax.swing.JLabel lblFoto;
     private javax.swing.JLabel lblNama;
     private javax.swing.JLabel lblNamaTabKegiatan;
-    private javax.swing.JLabel lblNoInduk;
+    private javax.swing.JLabel lblNoKTP;
     private javax.swing.JLabel lblTanggalLahir;
+    private javax.swing.JLabel lblTempatLahir;
     private javax.swing.JTable tabelKegiatan;
-    private javax.swing.JLabel txtFoto;
-    private javax.swing.JTextField txtNoInduk;
+    private javax.swing.JTextField txtNoKTP;
     // End of variables declaration//GEN-END:variables
 }

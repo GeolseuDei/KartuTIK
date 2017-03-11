@@ -42,10 +42,10 @@
                           <Component id="btnKegiatan" min="-2" pref="359" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnPencarian" min="-2" pref="144" max="-2" attributes="0"/>
-                          <Component id="btnLog" min="-2" pref="144" max="-2" attributes="0"/>
-                          <Component id="btnKeluar" min="-2" pref="144" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnKeluar" max="32767" attributes="0"/>
+                          <Component id="btnLog" pref="144" max="32767" attributes="0"/>
+                          <Component id="btnPencarian" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -74,9 +74,9 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="btnPencarian" min="-2" pref="92" max="-2" attributes="0"/>
-                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnLog" min="-2" pref="81" max="-2" attributes="0"/>
-                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnKeluar" min="-2" pref="78" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -123,6 +123,8 @@
     <Component class="javax.swing.JButton" name="btnTIK">
       <Properties>
         <Property name="text" type="java.lang.String" value="Data TIK"/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTIKActionPerformed"/>
@@ -131,6 +133,8 @@
     <Component class="javax.swing.JButton" name="btnPencarian">
       <Properties>
         <Property name="text" type="java.lang.String" value="Pencarian"/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPencarianActionPerformed"/>
@@ -139,6 +143,8 @@
     <Component class="javax.swing.JButton" name="btnKegiatan">
       <Properties>
         <Property name="text" type="java.lang.String" value="Kegiatan"/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKegiatanActionPerformed"/>
@@ -147,6 +153,8 @@
     <Component class="javax.swing.JButton" name="btnLog">
       <Properties>
         <Property name="text" type="java.lang.String" value="Riwayat Sistem"/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogActionPerformed"/>
@@ -155,6 +163,8 @@
     <Component class="javax.swing.JButton" name="btnKeluar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Keluar"/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKeluarActionPerformed"/>
