@@ -100,8 +100,12 @@ public class MenuAdmin extends javax.swing.JFrame {
         btnKeluar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelLog = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Selamat Datang,");
@@ -193,6 +197,28 @@ public class MenuAdmin extends javax.swing.JFrame {
             tabelLog.getColumnModel().getColumn(2).setMaxWidth(110);
         }
 
+        jMenu1.setText("Pengaturan");
+
+        jMenuItem1.setText("Ubah profil / Password");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Pengaturan Hak Akses");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,7 +270,7 @@ public class MenuAdmin extends javax.swing.JFrame {
                         .addComponent(btnKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -283,12 +309,30 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogActionPerformed
 
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
+        KartuTIK k = new KartuTIK();
+        k.Logout(k.idUser);
         t.stop();
         t2.stop();
         Login l = new Login();
         l.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnKeluarActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        t.stop();
+        t2.stop();
+        UbahProfil u = new UbahProfil();
+        u.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        t.stop();
+        t2.stop();
+        UbahHakAkses u = new UbahHakAkses();
+        u.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -333,6 +377,10 @@ public class MenuAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnTIK;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblJam;
     private javax.swing.JLabel lblNama;

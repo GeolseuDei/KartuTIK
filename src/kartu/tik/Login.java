@@ -155,7 +155,9 @@ public class Login extends javax.swing.JFrame {
                         m.setVisible(true);
                         this.dispose();
                     } else {
-                        
+                        MenuMember m = new MenuMember();
+                        m.setVisible(true);
+                        this.dispose();
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "Username atau password anda tidak ada / salah.");

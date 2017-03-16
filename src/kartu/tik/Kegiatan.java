@@ -67,7 +67,7 @@ public class Kegiatan extends javax.swing.JFrame {
         cmbBulan = new javax.swing.JComboBox<>();
         cmbTahun = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         chkToday.setText("Gunakan tanggal hari ini");
         chkToday.addActionListener(new java.awt.event.ActionListener() {
@@ -237,8 +237,10 @@ public class Kegiatan extends javax.swing.JFrame {
         waktu = tanggal + "-" + bulan + "-" + tahun;
         if (!kegiatan.isEmpty()) {
             int reply = JOptionPane.showConfirmDialog(this, "Apa anda yakin untuk menginput data kegiatan?", "Peringatan", JOptionPane.YES_NO_OPTION);
+            String noktp = txtKTP.getText();
             if (reply == JOptionPane.YES_OPTION) {
-                if (k.InsertKegiatan(k.d.getId(), kegiatan, waktu)) {
+                String nama = txtNama.getText();
+                if (k.InsertKegiatan(noktp, kegiatan, waktu, nama)) {
                     int reply2 = JOptionPane.showConfirmDialog(this, "Input data kegiatan berhasil! Apa anda ingin menginput kegiatan yang lain?", "Informasi", JOptionPane.YES_NO_OPTION);
                     if (reply2 == JOptionPane.YES_OPTION) {
                         txtKegiatan.setText("");
@@ -252,7 +254,9 @@ public class Kegiatan extends javax.swing.JFrame {
                             f.setVisible(true);
                             this.dispose();
                         } else {
-
+                            MenuMember f = new MenuMember();
+                            f.setVisible(true);
+                            this.dispose();
                         }
                     }
                 } else {
@@ -277,7 +281,9 @@ public class Kegiatan extends javax.swing.JFrame {
                     f.setVisible(true);
                     this.dispose();
                 } else {
-
+                    MenuMember m = new MenuMember();
+                        m.setVisible(true);
+                        this.dispose();
                 }
             } else {
 
@@ -306,8 +312,8 @@ public class Kegiatan extends javax.swing.JFrame {
         if (!ditekan) {
             if (!txtKTP.getText().isEmpty()) {
                 String ktp = txtKTP.getText();
-                if (k.AmbilDataTIKByKTP(ktp)) {
-                    txtNama.setText(k.d.getNamalengkap());
+                if (!k.AmbilNamaByKTP(ktp).equalsIgnoreCase("")) {
+                    txtNama.setText(k.AmbilNamaByKTP(ktp));
 
                     ditekan = true;
                     btnCari.setText("Ganti?");

@@ -75,7 +75,7 @@ public class MenuTIK extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelTIK = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         btnTambah.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         btnTambah.setText("Tambah Data");
@@ -183,7 +183,9 @@ public class MenuTIK extends javax.swing.JFrame {
             m.setVisible(true);
             this.dispose();
         } else {
-
+            MenuMember m = new MenuMember();
+            m.setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_btnKeluarActionPerformed
 

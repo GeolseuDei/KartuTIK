@@ -49,7 +49,6 @@ public class TambahUbahTIK extends javax.swing.JFrame {
         if (MenuTIK.tambahUbah == 1) {
             btnSimpanUbah.setText("Simpan");
         } else if (MenuTIK.tambahUbah == 2) {
-            btnFoto.setEnabled(false);
             btnSimpanUbah.setText("Ubah");
             PengisianDataLengkapUbah();
         } else if (MenuTIK.tambahUbah == 3) {
@@ -484,6 +483,7 @@ public class TambahUbahTIK extends javax.swing.JFrame {
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         txtRumusSidikJari = new javax.swing.JTextField();
+        jLabel58 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
@@ -529,7 +529,7 @@ public class TambahUbahTIK extends javax.swing.JFrame {
         btnSimpanUbah = new javax.swing.JButton();
         btnKembali = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         btnFoto.setText("Pilih Foto");
         btnFoto.addActionListener(new java.awt.event.ActionListener() {
@@ -1076,6 +1076,8 @@ public class TambahUbahTIK extends javax.swing.JFrame {
 
         jLabel40.setText("Rumus Sidik Jari :");
 
+        jLabel58.setText("cm");
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -1089,18 +1091,21 @@ public class TambahUbahTIK extends javax.swing.JFrame {
                         .addComponent(txtRumusSidikJari))
                     .addComponent(jLabel39)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                                 .addComponent(jLabel37)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtTinggi, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel9Layout.createSequentialGroup()
+                                .addComponent(txtTinggi, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel58)
+                                .addGap(12, 12, 12))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jLabel34)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtRambut, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel35)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel35)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jLabel38)
@@ -1132,7 +1137,8 @@ public class TambahUbahTIK extends javax.swing.JFrame {
                     .addComponent(jLabel37)
                     .addComponent(jLabel38)
                     .addComponent(txtTinggi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTandaIstimewa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTandaIstimewa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel58))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel40)
@@ -1526,39 +1532,76 @@ public class TambahUbahTIK extends javax.swing.JFrame {
     public static String extension;
     public static String nama;
     boolean insertDiTekan = false;
+    boolean updateDiTekan = false;
     private void btnFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoActionPerformed
-        if (insertDiTekan) {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-            int result = fileChooser.showOpenDialog(this);
-            if (result == JFileChooser.APPROVE_OPTION) {
-                File selectedFile = fileChooser.getSelectedFile();
-                extension = getFileExtension(selectedFile);
-                nama = selectedFile.getName();//"uploadfoto." + extension;
-                try {
-                    Thumbnails.of(new File(selectedFile.getAbsolutePath()))
-                            .size(98, 135) // p , l
-                            .toFile(new File(System.getProperty("user.dir") + "\\src\\foto\\" + nama));
-                } catch (IOException e) {
-                    JOptionPane.showMessageDialog(this, e);
+        if (MenuTIK.tambahUbah == 1) {
+            if (insertDiTekan) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+                int result = fileChooser.showOpenDialog(this);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    extension = getFileExtension(selectedFile);
+                    nama = selectedFile.getName();//"uploadfoto." + extension;
+                    try {
+                        Thumbnails.of(new File(selectedFile.getAbsolutePath()))
+                                .size(98, 135) // p , l
+                                .toFile(new File(System.getProperty("user.dir") + "\\src\\foto\\" + nama));
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog(this, e);
+                    }
+                    ImageIcon ii = new ImageIcon(System.getProperty("user.dir") + "\\src\\foto\\" + nama);
+                    lblFoto.setIcon(ii);
+                    lblFoto.setText("");
+                    directoryFoto = System.getProperty("user.dir") + "\\src\\foto\\" + nama;
+                    KartuTIK d = new KartuTIK();
+                    if (d.InsertFoto(this.directoryFoto, txtKTP.getText() + txtNamaLengkap.getText() + "." + this.extension, txtKTP.getText())) {
+                        JOptionPane.showMessageDialog(this, "Upload Foto (" + txtNamaLengkap.getText() + ") sukses!");
+                        MenuTIK m = new MenuTIK();
+                        m.setVisible(true);
+                        m.tambahUbah = 0;
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Upload Foto (" + txtNamaLengkap.getText() + ") gagal.");
+                    }
                 }
-                ImageIcon ii = new ImageIcon(System.getProperty("user.dir") + "\\src\\foto\\" + nama);
-                lblFoto.setIcon(ii);
-                lblFoto.setText("");
-                directoryFoto = System.getProperty("user.dir") + "\\src\\foto\\" + nama;
-                KartuTIK d = new KartuTIK();
-                if (d.InsertFoto(this.directoryFoto, txtKTP.getText() + txtNamaLengkap.getText() + "." + this.extension, txtKTP.getText())) {
-                    JOptionPane.showMessageDialog(this, "Upload Foto (" + txtNamaLengkap.getText() + ") sukses!");
-                    MenuTIK m = new MenuTIK();
-                    m.setVisible(true);
-                    m.tambahUbah = 0;
-                    this.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Upload Foto (" + txtNamaLengkap.getText() + ") gagal.");
-                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Mohon mengisikan data-data secara lengkap dahulu dan tekan tombol Simpan lalu tekan tombol ini kembali. ");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Mohon mengisikan data-data secara lengkap dahulu dan tekan tombol Simpan lalu tekan tombol ini kembali. ");
+        } else if (MenuTIK.tambahUbah == 2) {
+            if (updateDiTekan) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+                int result = fileChooser.showOpenDialog(this);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    extension = getFileExtension(selectedFile);
+                    nama = selectedFile.getName();//"uploadfoto." + extension;
+                    try {
+                        Thumbnails.of(new File(selectedFile.getAbsolutePath()))
+                                .size(98, 135) // p , l
+                                .toFile(new File(System.getProperty("user.dir") + "\\src\\foto\\" + nama));
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog(this, e);
+                    }
+                    ImageIcon ii = new ImageIcon(System.getProperty("user.dir") + "\\src\\foto\\" + nama);
+                    lblFoto.setIcon(ii);
+                    lblFoto.setText("");
+                    directoryFoto = System.getProperty("user.dir") + "\\src\\foto\\" + nama;
+                    KartuTIK d = new KartuTIK();
+                    if (d.UpdateFoto(this.directoryFoto, txtKTP.getText() + txtNamaLengkap.getText() + "." + this.extension, this.id)) {
+                        JOptionPane.showMessageDialog(this, "Perubahan Foto (" + txtNamaLengkap.getText() + ") sukses!");
+                        MenuTIK m = new MenuTIK();
+                        m.setVisible(true);
+                        m.tambahUbah = 0;
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Perubahan Foto (" + txtNamaLengkap.getText() + ") gagal.");
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Mohon mengisikan data-data secara lengkap dahulu dan tekan tombol Simpan lalu tekan tombol ini kembali. ");
+            }
         }
     }//GEN-LAST:event_btnFotoActionPerformed
 
@@ -1821,10 +1864,17 @@ public class TambahUbahTIK extends javax.swing.JFrame {
                 if (val == JOptionPane.YES_OPTION) {
                     if (d.UpdateDataTIK(this.id)) {
                         JOptionPane.showMessageDialog(this, "Perubahan data milik " + d.d.getNamalengkap() + " sukses!");
-                        MenuTIK m = new MenuTIK();
-                        m.setVisible(true);
-                        m.tambahUbah = 0;
-                        this.dispose();
+                        int rep = JOptionPane.showConfirmDialog(this, "Apa anda mau merubah foto?", "Pertanyaan.", JOptionPane.YES_NO_OPTION);
+                        if (rep == JOptionPane.YES_OPTION) {
+                            updateDiTekan = true;
+                            btnSimpanUbah.setEnabled(false);
+                            txtFieldEnabled(false);
+                        } else {
+                            MenuTIK m = new MenuTIK();
+                            m.setVisible(true);
+                            m.tambahUbah = 0;
+                            this.dispose();
+                        }
 
                     } else {
                         JOptionPane.showMessageDialog(this, "Penambahan data gagal.");
@@ -1838,7 +1888,8 @@ public class TambahUbahTIK extends javax.swing.JFrame {
         } else if (MenuTIK.tambahUbah == 3) {
             int val = JOptionPane.showConfirmDialog(this, "Apa anda sudah yakin akan Print data milik " + d.d.getNamalengkap() + " ?", "Peringatan!", JOptionPane.YES_NO_OPTION);
             if (val == JOptionPane.YES_OPTION) {
-                if (d.PrintDataTIK(d.d.getNamalengkap())) {
+                KartuTIK k = new KartuTIK();
+                if (d.PrintDataTIK(d.d.getNamalengkap(),k.idUser)) {
                     JOptionPane.showMessageDialog(this, "Print data milik " + d.d.getNamalengkap() + " berhasil dilaksanakan!");
                     Pencarian p = new Pencarian();
                     p.setVisible(true);
@@ -1953,6 +2004,7 @@ public class TambahUbahTIK extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

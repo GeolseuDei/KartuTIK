@@ -69,6 +69,7 @@ public class KartuTIK {
                 idUser = input.readLine();
                 namaUser = input.readLine();
                 tipeUser = input.readLine();
+                hakAksesUser = input.readLine();
             } else {
                 status = false;
             }
@@ -265,6 +266,7 @@ public class KartuTIK {
 
             if (input.readLine().equalsIgnoreCase("true")) {
                 status = true;
+                output.println(idUser);
             } else {
                 status = false;
             }
@@ -309,6 +311,53 @@ public class KartuTIK {
 
             String statusrespon = input.readLine();
             if (statusrespon.equalsIgnoreCase("true")) {
+                output.println(idUser);
+                status = true;
+            } else {
+                status = false;
+            }
+            s.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(KartuTIK.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
+    }
+
+    public boolean UpdateFoto(String url, String namafoto, String id) {
+        boolean status = false;
+        Socket s;
+        String address = "localhost";
+        int port = 8888;
+        PrintStream output;
+        BufferedReader input;
+        try {
+            s = new Socket(address, port);
+            output = new PrintStream(s.getOutputStream());
+            input = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            output.println("updatefoto");
+
+            output.println(namafoto);
+            output.println(id);
+
+            OutputStream outputStream = s.getOutputStream();
+
+            BufferedImage image = ImageIO.read(new File(url));
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            ImageIO.write(image, "jpg", byteArrayOutputStream);
+
+            byte[] size = ByteBuffer.allocate(4).putInt(byteArrayOutputStream.size()).array();
+            outputStream.write(size);
+            outputStream.write(byteArrayOutputStream.toByteArray());
+            outputStream.flush();
+            System.out.println("Flushed: " + System.currentTimeMillis());
+
+            System.out.println("Closing: " + System.currentTimeMillis());
+
+            String statusrespon = input.readLine();
+            if (statusrespon.equalsIgnoreCase("true")) {
+                output.println(idUser);
                 status = true;
             } else {
                 status = false;
@@ -600,6 +649,7 @@ public class KartuTIK {
             output.println(d.getKulit());
             output.println(d.getTinggi());
             output.println(d.getTandaistimewa());
+            output.println(d.getRumussidikjari());
             output.println(d.getNamasekolah1());
             output.println(d.getNamasekolah2());
             output.println(d.getNamasekolah3());
@@ -620,6 +670,7 @@ public class KartuTIK {
             String statusrespon = input.readLine();
             if (statusrespon.equalsIgnoreCase("true")) {
                 status = true;
+                output.println(idUser);
             } else {
                 status = false;
             }
@@ -650,6 +701,7 @@ public class KartuTIK {
             String statuslogin = input.readLine();
             if (statuslogin.equalsIgnoreCase("true")) {
                 status = true;
+                output.println(idUser);
             } else {
                 status = false;
             }
@@ -720,7 +772,7 @@ public class KartuTIK {
         return status;
     }
 
-    public boolean PrintDataTIK(String namalengkap) {
+    public boolean PrintDataTIK(String namalengkap, String idUser) {
         boolean status = false;
         Socket s;
         String address = ipkeserver;
@@ -739,6 +791,7 @@ public class KartuTIK {
             String statuslogin = input.readLine();
             if (statuslogin.equalsIgnoreCase("true")) {
                 status = true;
+                output.println(idUser);
             } else {
                 status = false;
             }
@@ -781,7 +834,7 @@ public class KartuTIK {
         return list;
     }
 
-    public boolean InsertKegiatan(String id, String kegiatan, String waktu) {
+    public boolean InsertKegiatan(String id, String kegiatan, String waktu, String nama) {
         boolean status = false;
         Socket s;
         String address = ipkeserver;
@@ -798,6 +851,39 @@ public class KartuTIK {
             output.println(id);
             output.println(kegiatan);
             output.println(waktu);
+            output.println(nama);
+
+            String statuslogin = input.readLine();
+            if (statuslogin.equalsIgnoreCase("true")) {
+                status = true;
+                output.println(idUser);
+            } else {
+                status = false;
+            }
+            s.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(KartuTIK.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
+    }
+
+    public boolean GantiNama(String namabaru, String id) {
+        boolean status = false;
+        Socket s;
+        String address = ipkeserver;
+        int port = portkeserver;
+        PrintStream output;
+        BufferedReader input;
+        try {
+            s = new Socket(address, port);
+            output = new PrintStream(s.getOutputStream());
+            input = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            String jenisdata = "gantinama";
+            output.println(jenisdata);
+
+            output.println(namabaru);
+            output.println(id);
 
             String statuslogin = input.readLine();
             if (statuslogin.equalsIgnoreCase("true")) {
@@ -813,4 +899,176 @@ public class KartuTIK {
         return status;
     }
 
+    public boolean PasswordLamaSama(String passwordlama, String id) {
+        boolean status = false;
+        Socket s;
+        String address = ipkeserver;
+        int port = portkeserver;
+        PrintStream output;
+        BufferedReader input;
+        try {
+            s = new Socket(address, port);
+            output = new PrintStream(s.getOutputStream());
+            input = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            String jenisdata = "cekpassword";
+            output.println(jenisdata);
+
+            output.println(passwordlama);
+            output.println(id);
+
+            String statuslogin = input.readLine();
+            if (statuslogin.equalsIgnoreCase("true")) {
+                status = true;
+            } else {
+                status = false;
+            }
+            s.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(KartuTIK.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
+    }
+
+    public boolean GantiPassword(String password, String id) {
+        boolean status = false;
+        Socket s;
+        String address = ipkeserver;
+        int port = portkeserver;
+        PrintStream output;
+        BufferedReader input;
+        try {
+            s = new Socket(address, port);
+            output = new PrintStream(s.getOutputStream());
+            input = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            String jenisdata = "gantipassword";
+            output.println(jenisdata);
+
+            output.println(password);
+            output.println(id);
+
+            String statuslogin = input.readLine();
+            if (statuslogin.equalsIgnoreCase("true")) {
+                status = true;
+            } else {
+                status = false;
+            }
+            s.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(KartuTIK.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
+    }
+
+    public String DataHakAkses(String noinduk) {
+        String data = "";
+        Socket s;
+        String address = ipkeserver;
+        int port = portkeserver;
+        PrintStream output;
+        BufferedReader input;
+        try {
+            s = new Socket(address, port);
+            output = new PrintStream(s.getOutputStream());
+            input = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            String jenisdata = "datahakakses";
+            output.println(jenisdata);
+
+            output.println(noinduk);
+
+            String statuslogin = input.readLine();
+            if (statuslogin.equalsIgnoreCase("true")) {
+                data = input.readLine();
+            } else {
+                data = "";
+            }
+            s.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(KartuTIK.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
+
+    public boolean UbahHakAkses(String noinduk, String jenis, String nama) {
+        boolean status = false;
+        Socket s;
+        String address = ipkeserver;
+        int port = portkeserver;
+        PrintStream output;
+        BufferedReader input;
+        try {
+            s = new Socket(address, port);
+            output = new PrintStream(s.getOutputStream());
+            input = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            String jenisdata = "ubahhakakses";
+            output.println(jenisdata);
+
+            output.println(noinduk);
+            output.println(jenis);
+            output.println(nama);
+
+            String statuslogin = input.readLine();
+            if (statuslogin.equalsIgnoreCase("true")) {
+                status = true;
+                output.println(idUser);
+            } else {
+                status = false;
+            }
+            s.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(KartuTIK.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
+    }
+
+    public void Logout(String id) {
+        Socket s;
+        String address = ipkeserver;
+        int port = portkeserver;
+        PrintStream output;
+        BufferedReader input;
+        try {
+            s = new Socket(address, port);
+            output = new PrintStream(s.getOutputStream());
+            input = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            String jenisdata = "logout";
+            output.println(jenisdata);
+
+            output.println(id);
+
+            s.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(KartuTIK.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public String AmbilNamaByKTP(String ktp) {
+        String data = "";
+        Socket s;
+        String address = ipkeserver;
+        int port = portkeserver;
+        PrintStream output;
+        BufferedReader input;
+        try {
+            s = new Socket(address, port);
+            output = new PrintStream(s.getOutputStream());
+            input = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            String jenisdata = "ambilnamabyktp";
+            output.println(jenisdata);
+
+            output.println(ktp);
+
+            data = input.readLine();
+
+            s.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(KartuTIK.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
 }

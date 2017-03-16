@@ -76,7 +76,7 @@ public class Pencarian extends javax.swing.JFrame {
         tabelKegiatan = new javax.swing.JTable();
         lblNamaTabKegiatan = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -386,7 +386,9 @@ public class Pencarian extends javax.swing.JFrame {
             m.setVisible(true);
             this.dispose();
         } else {
-
+            MenuMember m = new MenuMember();
+            m.setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_btnBackActionPerformed
     public static String ktp = "";
