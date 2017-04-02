@@ -152,6 +152,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnTIK">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/btnImages/1489683437641.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Data TIK"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
         <Property name="verticalTextPosition" type="int" value="3"/>
@@ -162,6 +165,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnPencarian">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/btnImages/1489683454535.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Pencarian"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
         <Property name="verticalTextPosition" type="int" value="3"/>
@@ -172,6 +178,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnKegiatan">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/btnImages/1489683454555.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Kegiatan"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
         <Property name="verticalTextPosition" type="int" value="3"/>
@@ -182,6 +191,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnLog">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/btnImages/1489683454525.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Riwayat Sistem"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
         <Property name="verticalTextPosition" type="int" value="3"/>
@@ -192,6 +204,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnKeluar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/btnImages/1489683454507.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Keluar"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
         <Property name="verticalTextPosition" type="int" value="3"/>

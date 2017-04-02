@@ -358,10 +358,15 @@ public class Pencarian extends javax.swing.JFrame {
                         model.addRow(rowData);
                     }
                     tabelKegiatan.setModel(model);
-                    ImageIcon ii = new ImageIcon(k.d.getUrlfoto());
-                    lblFoto.setIcon(ii);
-                    lblFoto.setText("");
-                    this.urlfoto = k.d.getUrlfoto();
+                    if (k.d.getUrlfoto().isEmpty() || k.d.getUrlfoto().equalsIgnoreCase("") || k.d.getUrlfoto() == null) {
+                        lblFoto.setText("Tidak ada foto");
+                    } else {
+                        ImageIcon ii = new ImageIcon(k.d.getUrlfoto());
+                        lblFoto.setIcon(ii);
+                        lblFoto.setText("");
+                        this.urlfoto = k.d.getUrlfoto();
+                    }
+                    System.out.println(k.d.getUrlfoto());
 
                     diTekan = true;
                     txtNoKTP.setEnabled(false);

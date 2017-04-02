@@ -226,49 +226,53 @@ public class Kegiatan extends javax.swing.JFrame {
     }//GEN-LAST:event_chkTodayActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        String kegiatan = txtKegiatan.getText();
-        String waktu, tanggal, bulan, tahun;
-        cmbTanggal.setEditable(true);
-        cmbBulan.setEditable(true);
-        cmbTahun.setEditable(true);
-        tanggal = cmbTanggal.getEditor().getItem().toString();
-        bulan = cmbBulan.getEditor().getItem().toString();
-        tahun = cmbTahun.getEditor().getItem().toString();
-        waktu = tanggal + "-" + bulan + "-" + tahun;
-        if (!kegiatan.isEmpty()) {
-            int reply = JOptionPane.showConfirmDialog(this, "Apa anda yakin untuk menginput data kegiatan?", "Peringatan", JOptionPane.YES_NO_OPTION);
-            String noktp = txtKTP.getText();
-            if (reply == JOptionPane.YES_OPTION) {
-                String nama = txtNama.getText();
-                if (k.InsertKegiatan(noktp, kegiatan, waktu, nama)) {
-                    int reply2 = JOptionPane.showConfirmDialog(this, "Input data kegiatan berhasil! Apa anda ingin menginput kegiatan yang lain?", "Informasi", JOptionPane.YES_NO_OPTION);
-                    if (reply2 == JOptionPane.YES_OPTION) {
-                        txtKegiatan.setText("");
-                        cmbTanggal.setEditable(false);
-                        cmbBulan.setEditable(false);
-                        cmbTahun.setEditable(false);
-                        chkToday.setSelected(false);
-                    } else {
-                        if (k.tipeUser.equalsIgnoreCase("1")) {
-                            MenuAdmin f = new MenuAdmin();
-                            f.setVisible(true);
-                            this.dispose();
+        if (ditekan) {
+            String kegiatan = txtKegiatan.getText();
+            String waktu, tanggal, bulan, tahun;
+            cmbTanggal.setEditable(true);
+            cmbBulan.setEditable(true);
+            cmbTahun.setEditable(true);
+            tanggal = cmbTanggal.getEditor().getItem().toString();
+            bulan = cmbBulan.getEditor().getItem().toString();
+            tahun = cmbTahun.getEditor().getItem().toString();
+            waktu = tanggal + "-" + bulan + "-" + tahun;
+            if (!kegiatan.isEmpty()) {
+                int reply = JOptionPane.showConfirmDialog(this, "Apa anda yakin untuk menginput data kegiatan?", "Peringatan", JOptionPane.YES_NO_OPTION);
+                String noktp = txtKTP.getText();
+                if (reply == JOptionPane.YES_OPTION) {
+                    String nama = txtNama.getText();
+                    if (k.InsertKegiatan(noktp, kegiatan, waktu, nama)) {
+                        int reply2 = JOptionPane.showConfirmDialog(this, "Input data kegiatan berhasil! Apa anda ingin menginput kegiatan yang lain?", "Informasi", JOptionPane.YES_NO_OPTION);
+                        if (reply2 == JOptionPane.YES_OPTION) {
+                            txtKegiatan.setText("");
+                            cmbTanggal.setEditable(false);
+                            cmbBulan.setEditable(false);
+                            cmbTahun.setEditable(false);
+                            chkToday.setSelected(false);
                         } else {
-                            MenuMember f = new MenuMember();
-                            f.setVisible(true);
-                            this.dispose();
+                            if (k.tipeUser.equalsIgnoreCase("1")) {
+                                MenuAdmin f = new MenuAdmin();
+                                f.setVisible(true);
+                                this.dispose();
+                            } else {
+                                MenuMember f = new MenuMember();
+                                f.setVisible(true);
+                                this.dispose();
+                            }
                         }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Input data kegiatan gagal.");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Input data kegiatan gagal.");
+                    cmbTanggal.setEditable(false);
+                    cmbBulan.setEditable(false);
+                    cmbTahun.setEditable(false);
                 }
             } else {
-                cmbTanggal.setEditable(false);
-                cmbBulan.setEditable(false);
-                cmbTahun.setEditable(false);
+                JOptionPane.showMessageDialog(this, "Masukkan data kegiatan!");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Masukkan data kegiatan!");
+            JOptionPane.showMessageDialog(this, "Tekan tombol cari untuk memastikan tujuan data kegiatan benar");
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
@@ -282,8 +286,8 @@ public class Kegiatan extends javax.swing.JFrame {
                     this.dispose();
                 } else {
                     MenuMember m = new MenuMember();
-                        m.setVisible(true);
-                        this.dispose();
+                    m.setVisible(true);
+                    this.dispose();
                 }
             } else {
 

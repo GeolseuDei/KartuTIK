@@ -11,13 +11,16 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -45,6 +48,14 @@ public class KartuTIK {
 
     private String ipkeserver = "localhost";
     private int portkeserver = 8888;
+
+
+    public void ReadingIPFromNotePad() throws FileNotFoundException {
+        Scanner fileIn = new Scanner(new File(System.getProperty("user.dir") + "\\ip.txt"));
+        String fileRead = fileIn.nextLine();
+        String fileReadPart[] = fileRead.split(":");
+        ipkeserver = fileReadPart[1];
+    }
 
     public boolean Login(String username, String password) {
         boolean status = false;
@@ -287,6 +298,9 @@ public class KartuTIK {
         BufferedReader input;
         try {
             s = new Socket(address, port);
+            s.setReceiveBufferSize(4096);
+            s.setSendBufferSize(4096);
+            s.setSoTimeout(2000);
             output = new PrintStream(s.getOutputStream());
             input = new BufferedReader(new InputStreamReader(s.getInputStream()));
             output.println("insertfoto");
@@ -316,6 +330,7 @@ public class KartuTIK {
             } else {
                 status = false;
             }
+            outputStream.close();
             s.close();
 
         } catch (IOException ex) {
@@ -333,6 +348,9 @@ public class KartuTIK {
         BufferedReader input;
         try {
             s = new Socket(address, port);
+            s.setReceiveBufferSize(4096);
+            s.setSendBufferSize(4096);
+            s.setSoTimeout(2000);
             output = new PrintStream(s.getOutputStream());
             input = new BufferedReader(new InputStreamReader(s.getInputStream()));
             output.println("updatefoto");
@@ -362,6 +380,7 @@ public class KartuTIK {
             } else {
                 status = false;
             }
+            outputStream.close();
             s.close();
 
         } catch (IOException ex) {
@@ -457,7 +476,33 @@ public class KartuTIK {
             d.setCatatankriminal1(input.readLine());
             d.setCatatankriminal2(input.readLine());
             d.setCatatankriminal3(input.readLine());
+            d.setUrlfoto(input.readLine());
+            s.close();
 
+        } catch (IOException ex) {
+            Logger.getLogger(KartuTIK.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public boolean AmbilFotoTIKbyID(String id) {
+        boolean status = false;
+        Socket s;
+        String address = ipkeserver;
+        int port = portkeserver;
+        PrintStream output;
+        BufferedReader input;
+        try {
+            s = new Socket(address, port);
+            s.setReceiveBufferSize(4096);
+            s.setSendBufferSize(4096);
+            s.setSoTimeout(2000);
+            output = new PrintStream(s.getOutputStream());
+            input = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            String jenisdata = "ambilfotoubah";
+            output.println(jenisdata);
+
+            output.println(id);
+            
             BufferedInputStream inputStream = new BufferedInputStream(s.getInputStream());
 
             String nama = input.readLine();
@@ -478,13 +523,18 @@ public class KartuTIK {
 
             d.setUrlfoto(System.getProperty("user.dir") + "\\src\\foto\\" + nama);
             System.out.println(d.getUrlfoto());
+            
+            status = true;
+            
+            inputStream.close();
             s.close();
 
         } catch (IOException ex) {
             Logger.getLogger(KartuTIK.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return status;
     }
-
+    
     public void AmbilDataLengkapByKTP(String ktp) {
         Socket s;
         String address = ipkeserver;
@@ -722,6 +772,9 @@ public class KartuTIK {
         BufferedReader input;
         try {
             s = new Socket(address, port);
+            s.setReceiveBufferSize(4096);
+            s.setSendBufferSize(4096);
+            s.setSoTimeout(2000);
             output = new PrintStream(s.getOutputStream());
             input = new BufferedReader(new InputStreamReader(s.getInputStream()));
             String jenisdata = "ambildataTIKbyKTP";

@@ -99,6 +99,7 @@ public class MenuMember extends javax.swing.JFrame {
         lblJam.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblJam.setText("00:00:00");
 
+        btnTIK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnImages/1489683437641.png"))); // NOI18N
         btnTIK.setText("Data TIK");
         btnTIK.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnTIK.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -108,6 +109,7 @@ public class MenuMember extends javax.swing.JFrame {
             }
         });
 
+        btnPencarian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnImages/1489683454535.png"))); // NOI18N
         btnPencarian.setText("Pencarian");
         btnPencarian.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPencarian.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -117,6 +119,7 @@ public class MenuMember extends javax.swing.JFrame {
             }
         });
 
+        btnKegiatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnImages/1489683454555.png"))); // NOI18N
         btnKegiatan.setText("Kegiatan");
         btnKegiatan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnKegiatan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -126,6 +129,7 @@ public class MenuMember extends javax.swing.JFrame {
             }
         });
 
+        btnLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnImages/1489683454525.png"))); // NOI18N
         btnLog.setText("Riwayat Sistem");
         btnLog.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLog.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -135,6 +139,7 @@ public class MenuMember extends javax.swing.JFrame {
             }
         });
 
+        btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnImages/1489683454507.png"))); // NOI18N
         btnKeluar.setText("Keluar");
         btnKeluar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnKeluar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);

@@ -8,6 +8,8 @@ package kartu.tik;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
+import java.io.FileNotFoundException;
+import java.net.ConnectException;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -58,8 +60,8 @@ public class Login extends javax.swing.JFrame {
         setBackground(new java.awt.Color(153, 153, 255));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Insert key picture here.");
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnImages/1489683454549.png"))); // NOI18N
+        jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -122,22 +124,21 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(61, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -147,20 +148,26 @@ public class Login extends javax.swing.JFrame {
         KartuTIK k = new KartuTIK();
         String username = txtUsername.getText();
         String password = txtPassword.getText();
-        if(!username.isEmpty()){
-            if(!password.isEmpty()){
-                if(k.Login(username, password)){
-                    if(k.tipeUser.equalsIgnoreCase("1")){
-                        MenuAdmin m = new MenuAdmin();
-                        m.setVisible(true);
-                        this.dispose();
+        if (!username.isEmpty()) {
+            if (!password.isEmpty()) {
+                try {
+                    k.ReadingIPFromNotePad();
+                    if (k.Login(username, password)) {
+                        if (k.tipeUser.equalsIgnoreCase("1")) {
+                            MenuAdmin m = new MenuAdmin();
+                            m.setVisible(true);
+                            this.dispose();
+                        } else {
+                            MenuMember m = new MenuMember();
+                            m.setVisible(true);
+                            this.dispose();
+                        }
                     } else {
-                        MenuMember m = new MenuMember();
-                        m.setVisible(true);
-                        this.dispose();
+                        JOptionPane.showMessageDialog(this, "Username atau password anda tidak ada / salah.");
+                        txtPassword.setText("");
                     }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Username atau password anda tidak ada / salah.");
+                } catch (FileNotFoundException e){
+                    JOptionPane.showMessageDialog(this, "IP address SERVER tidak ditemukan");
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Masukkan password anda.");
