@@ -25,7 +25,7 @@ public class MenuMember extends javax.swing.JFrame {
      * Creates new form MenuMember
      */
     Timer t;
-    
+
     public MenuMember() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -41,9 +41,9 @@ public class MenuMember extends javax.swing.JFrame {
         int dx = centerPoint.x - windowSize.width / 2;
         int dy = centerPoint.y - windowSize.height / 2;
         setLocation(dx, dy);
-        
+
         KartuTIK k = new KartuTIK();
-        if(k.hakAksesUser.equalsIgnoreCase("1")){
+        if (k.hakAksesUser.equalsIgnoreCase("1")) {
             btnKegiatan.setEnabled(true);
             btnLog.setEnabled(true);
         } else {
@@ -51,6 +51,24 @@ public class MenuMember extends javax.swing.JFrame {
             btnLog.setEnabled(false);
         }
         lblNama.setText(k.namaUser);
+        
+        String title = "";
+        switch (k.divisi){
+            case "1":
+                title = "Bagian Ekonomi";
+                break;
+            case "2":
+                title = "Bagian Politik";
+                break;
+            case "3":
+                title = "Bagian Sosial Budaya";
+                break;
+            case "4":
+                title = "Bagian Keamanan";
+                break;
+        }
+
+        setTitle(title);
         
         ActionListener updateClockAction = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -232,7 +250,7 @@ public class MenuMember extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPencarianActionPerformed
 
     private void btnKegiatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKegiatanActionPerformed
-       t.stop();
+        t.stop();
         Kegiatan k = new Kegiatan();
         k.setVisible(true);
         this.dispose();
@@ -247,7 +265,7 @@ public class MenuMember extends javax.swing.JFrame {
 
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
         KartuTIK k = new KartuTIK();
-        k.Logout(k.idUser);
+        k.Logout(k.idUser, k.divisi);
         t.stop();
         Login l = new Login();
         l.setVisible(true);

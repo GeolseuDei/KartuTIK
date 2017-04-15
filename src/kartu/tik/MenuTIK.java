@@ -43,7 +43,7 @@ public class MenuTIK extends javax.swing.JFrame {
 
     private void LoadTabelDataTIK() {
         KartuTIK k = new KartuTIK();
-        ArrayList<DataTIK> list = new ArrayList<>(k.AmbilDataTabelTIK());
+        ArrayList<DataTIK> list = new ArrayList<>(k.AmbilDataTabelTIK(k.divisi));
         DefaultTableModel model = (DefaultTableModel) tabelTIK.getModel();
         model.setRowCount(0);
         Object rowData[] = new Object[6];
@@ -224,7 +224,7 @@ public class MenuTIK extends javax.swing.JFrame {
                 String namaLengkap = tabelTIK.getValueAt(row, 0).toString();
                 int val = JOptionPane.showConfirmDialog(this, "Apa anda yakin akan menghapus data milik " + namaLengkap + " ?", "Peringatan!", JOptionPane.YES_NO_OPTION);
                 if (val == JOptionPane.YES_OPTION) {
-                    if (k.DeleteDataTIK(namaLengkap)) {
+                    if (k.DeleteDataTIK(namaLengkap, k.divisi)) {
                         JOptionPane.showMessageDialog(this, "Data milik " + namaLengkap + " berhasil di hapus.");
                         LoadTabelDataTIK();
                     } else {

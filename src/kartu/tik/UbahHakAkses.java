@@ -271,7 +271,7 @@ public class UbahHakAkses extends javax.swing.JFrame {
                 if (val == JOptionPane.YES_OPTION) {
                     KartuTIK k = new KartuTIK();
                     String noinduk = txtNoInduk.getText();
-                    if (k.UbahHakAkses(noinduk, "beri", nama)) {
+                    if (k.UbahHakAkses(noinduk, "beri", nama, k.divisi)) {
                         JOptionPane.showMessageDialog(this, "Pemberian hak akses spesial berhasil!");
                         txtNoInduk.setText("");
                         cariDiTekan = false;
@@ -288,7 +288,7 @@ public class UbahHakAkses extends javax.swing.JFrame {
                 if (val == JOptionPane.YES_OPTION) {
                     KartuTIK k = new KartuTIK();
                     String noinduk = txtNoInduk.getText();
-                    if (k.UbahHakAkses(noinduk, "cabut", nama)) {
+                    if (k.UbahHakAkses(noinduk, "cabut", nama, k.divisi)) {
                         JOptionPane.showMessageDialog(this, "Pencabutan hak akses spesial berhasil!");
                         txtNoInduk.setText("");
                         cariDiTekan = false;

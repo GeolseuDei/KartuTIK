@@ -241,7 +241,7 @@ public class Kegiatan extends javax.swing.JFrame {
                 String noktp = txtKTP.getText();
                 if (reply == JOptionPane.YES_OPTION) {
                     String nama = txtNama.getText();
-                    if (k.InsertKegiatan(noktp, kegiatan, waktu, nama)) {
+                    if (k.InsertKegiatan(noktp, kegiatan, waktu, nama, k.divisi)) {
                         int reply2 = JOptionPane.showConfirmDialog(this, "Input data kegiatan berhasil! Apa anda ingin menginput kegiatan yang lain?", "Informasi", JOptionPane.YES_NO_OPTION);
                         if (reply2 == JOptionPane.YES_OPTION) {
                             txtKegiatan.setText("");
@@ -316,8 +316,8 @@ public class Kegiatan extends javax.swing.JFrame {
         if (!ditekan) {
             if (!txtKTP.getText().isEmpty()) {
                 String ktp = txtKTP.getText();
-                if (!k.AmbilNamaByKTP(ktp).equalsIgnoreCase("")) {
-                    txtNama.setText(k.AmbilNamaByKTP(ktp));
+                if (!k.AmbilNamaByKTP(ktp, k.divisi).equalsIgnoreCase("")) {
+                    txtNama.setText(k.AmbilNamaByKTP(ktp, k.divisi));
 
                     ditekan = true;
                     btnCari.setText("Ganti?");

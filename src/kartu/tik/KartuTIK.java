@@ -45,6 +45,7 @@ public class KartuTIK {
     public static String namaUser = "";
     public static String tipeUser = "";
     public static String hakAksesUser = "";
+    public static String divisi = "";
 
     private String ipkeserver = "localhost";
     private int portkeserver = 8888;
@@ -81,6 +82,7 @@ public class KartuTIK {
                 namaUser = input.readLine();
                 tipeUser = input.readLine();
                 hakAksesUser = input.readLine();
+                divisi = input.readLine();
             } else {
                 status = false;
             }
@@ -92,7 +94,7 @@ public class KartuTIK {
         return status;
     }
 
-    public ArrayList AmbilDataLogMenuAdmin() {
+    public ArrayList AmbilDataLogMenuAdmin(String divisi) {
         ArrayList list = new ArrayList<>();
         Socket s;
         String address = ipkeserver;
@@ -106,6 +108,8 @@ public class KartuTIK {
             String jenisdata = "menulog";
             output.println(jenisdata);
 
+            output.println(divisi);
+            
             int sizeArray = Integer.parseInt(input.readLine());
             for (int i = 0; i < sizeArray; i++) {
                 classLog l = new classLog();
@@ -156,7 +160,7 @@ public class KartuTIK {
         return list;
     }
 
-    public ArrayList AmbilDataTabelTIK() {
+    public ArrayList AmbilDataTabelTIK(String divisi) {
         ArrayList list = new ArrayList<>();
         Socket s;
         String address = ipkeserver;
@@ -169,6 +173,8 @@ public class KartuTIK {
             input = new BufferedReader(new InputStreamReader(s.getInputStream()));
             String jenisdata = "tabeltik";
             output.println(jenisdata);
+            
+            output.println(divisi);
 
             int sizeArray = Integer.parseInt(input.readLine());
             for (int i = 0; i < sizeArray; i++) {
@@ -189,7 +195,7 @@ public class KartuTIK {
         return list;
     }
 
-    public boolean InsertDataTIK() {
+    public boolean InsertDataTIK(String divisi) {
         boolean status = false;
         Socket s;
         String address = ipkeserver;
@@ -274,6 +280,7 @@ public class KartuTIK {
             output.println(d.getCatatankriminal1());
             output.println(d.getCatatankriminal2());
             output.println(d.getCatatankriminal3());
+            output.println(divisi);
 
             if (input.readLine().equalsIgnoreCase("true")) {
                 status = true;
@@ -289,7 +296,7 @@ public class KartuTIK {
         return status;
     }
 
-    public boolean InsertFoto(String url, String namafoto, String noktp) {
+    public boolean InsertFoto(String url, String namafoto, String noktp, String divisi) {
         boolean status = false;
         Socket s;
         String address = "localhost";
@@ -307,6 +314,7 @@ public class KartuTIK {
 
             output.println(namafoto);
             output.println(noktp);
+            output.println(divisi);
 
             OutputStream outputStream = s.getOutputStream();
 
@@ -339,7 +347,7 @@ public class KartuTIK {
         return status;
     }
 
-    public boolean UpdateFoto(String url, String namafoto, String id) {
+    public boolean UpdateFoto(String url, String namafoto, String id, String divisi) {
         boolean status = false;
         Socket s;
         String address = "localhost";
@@ -357,6 +365,7 @@ public class KartuTIK {
 
             output.println(namafoto);
             output.println(id);
+            output.println(divisi);
 
             OutputStream outputStream = s.getOutputStream();
 
@@ -535,7 +544,7 @@ public class KartuTIK {
         return status;
     }
     
-    public void AmbilDataLengkapByKTP(String ktp) {
+    public void AmbilDataLengkapByKTP(String ktp, String divisi) {
         Socket s;
         String address = ipkeserver;
         int port = portkeserver;
@@ -549,6 +558,7 @@ public class KartuTIK {
             output.println(jenisdata);
 
             output.println(ktp);
+            output.println(divisi);
 
             d.setId(input.readLine());
             d.setNamalengkap(input.readLine());
@@ -630,7 +640,7 @@ public class KartuTIK {
         }
     }
 
-    public boolean UpdateDataTIK(String id) {
+    public boolean UpdateDataTIK(String id, String divisi) {
         boolean status = false;
         Socket s;
         String address = ipkeserver;
@@ -716,6 +726,7 @@ public class KartuTIK {
             output.println(d.getCatatankriminal1());
             output.println(d.getCatatankriminal2());
             output.println(d.getCatatankriminal3());
+            output.println(divisi);
 
             String statusrespon = input.readLine();
             if (statusrespon.equalsIgnoreCase("true")) {
@@ -732,7 +743,7 @@ public class KartuTIK {
         return status;
     }
 
-    public boolean DeleteDataTIK(String namalengkap) {
+    public boolean DeleteDataTIK(String namalengkap,String divisi) {
         boolean status = false;
         Socket s;
         String address = ipkeserver;
@@ -747,6 +758,7 @@ public class KartuTIK {
             output.println(jenisdata);
 
             output.println(namalengkap);
+            output.println(divisi);
 
             String statuslogin = input.readLine();
             if (statuslogin.equalsIgnoreCase("true")) {
@@ -763,7 +775,7 @@ public class KartuTIK {
         return status;
     }
 
-    public boolean AmbilDataTIKByKTP(String ktp) {
+    public boolean AmbilDataTIKByKTP(String ktp, String divisi) {
         boolean status = false;
         Socket s;
         String address = ipkeserver;
@@ -781,6 +793,7 @@ public class KartuTIK {
             output.println(jenisdata);
 
             output.println(ktp);
+            output.println(divisi);
 
             String statuslogin = input.readLine();
             if (statuslogin.equalsIgnoreCase("true")) {
@@ -825,7 +838,7 @@ public class KartuTIK {
         return status;
     }
 
-    public boolean PrintDataTIK(String namalengkap, String idUser) {
+    public boolean PrintDataTIK(String namalengkap, String idUser, String divisi) {
         boolean status = false;
         Socket s;
         String address = ipkeserver;
@@ -840,6 +853,7 @@ public class KartuTIK {
             output.println(jenisdata);
 
             output.println(namalengkap);
+            output.print(divisi);
 
             String statuslogin = input.readLine();
             if (statuslogin.equalsIgnoreCase("true")) {
@@ -887,7 +901,7 @@ public class KartuTIK {
         return list;
     }
 
-    public boolean InsertKegiatan(String id, String kegiatan, String waktu, String nama) {
+    public boolean InsertKegiatan(String id, String kegiatan, String waktu, String nama, String divisi) {
         boolean status = false;
         Socket s;
         String address = ipkeserver;
@@ -905,6 +919,7 @@ public class KartuTIK {
             output.println(kegiatan);
             output.println(waktu);
             output.println(nama);
+            output.println(divisi);
 
             String statuslogin = input.readLine();
             if (statuslogin.equalsIgnoreCase("true")) {
@@ -1044,7 +1059,7 @@ public class KartuTIK {
         return data;
     }
 
-    public boolean UbahHakAkses(String noinduk, String jenis, String nama) {
+    public boolean UbahHakAkses(String noinduk, String jenis, String nama, String divisi) {
         boolean status = false;
         Socket s;
         String address = ipkeserver;
@@ -1061,6 +1076,7 @@ public class KartuTIK {
             output.println(noinduk);
             output.println(jenis);
             output.println(nama);
+            output.println(divisi);
 
             String statuslogin = input.readLine();
             if (statuslogin.equalsIgnoreCase("true")) {
@@ -1077,7 +1093,7 @@ public class KartuTIK {
         return status;
     }
 
-    public void Logout(String id) {
+    public void Logout(String id, String divisi) {
         Socket s;
         String address = ipkeserver;
         int port = portkeserver;
@@ -1091,6 +1107,7 @@ public class KartuTIK {
             output.println(jenisdata);
 
             output.println(id);
+            output.println(divisi);
 
             s.close();
 
@@ -1099,7 +1116,7 @@ public class KartuTIK {
         }
     }
 
-    public String AmbilNamaByKTP(String ktp) {
+    public String AmbilNamaByKTP(String ktp, String divisi) {
         String data = "";
         Socket s;
         String address = ipkeserver;
@@ -1114,6 +1131,7 @@ public class KartuTIK {
             output.println(jenisdata);
 
             output.println(ktp);
+            output.println(divisi);
 
             data = input.readLine();
 
@@ -1123,5 +1141,39 @@ public class KartuTIK {
             Logger.getLogger(KartuTIK.class.getName()).log(Level.SEVERE, null, ex);
         }
         return data;
+    }
+    
+    public boolean BuatAkunMember(String nama, String noinduk, String username, String password, String divisi) {
+        boolean respon = false;
+        Socket s;
+        String address = ipkeserver;
+        int port = portkeserver;
+        PrintStream output;
+        BufferedReader input;
+        try {
+            s = new Socket(address, port);
+            output = new PrintStream(s.getOutputStream());
+            input = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            String jenisdata = "buatakunmember";
+            output.println(jenisdata);
+
+            output.println(nama);
+            output.println(noinduk);
+            output.println(username);
+            output.println(password);
+            output.println(divisi);
+            
+            if(input.readLine().equalsIgnoreCase("true")){
+                respon = true;
+            } else {
+                respon = false;
+            }
+            
+            s.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(KartuTIK.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return respon;
     }
 }

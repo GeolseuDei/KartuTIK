@@ -47,6 +47,24 @@ public class MenuAdmin extends javax.swing.JFrame {
         KartuTIK k = new KartuTIK();
         lblNama.setText(k.namaUser);
 
+        String title = "";
+        switch (k.divisi){
+            case "1":
+                title = "Bagian Ekonomi";
+                break;
+            case "2":
+                title = "Bagian Politik";
+                break;
+            case "3":
+                title = "Bagian Sosial Budaya";
+                break;
+            case "4":
+                title = "Bagian Keamanan";
+                break;
+        }
+
+        setTitle(title);
+        
         ActionListener updateClockAction = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -68,7 +86,7 @@ public class MenuAdmin extends javax.swing.JFrame {
 
     public void addRowToTable() {
         KartuTIK k = new KartuTIK();
-        ArrayList<classLog> list = new ArrayList<>(k.AmbilDataLogMenuAdmin());
+        ArrayList<classLog> list = new ArrayList<>(k.AmbilDataLogMenuAdmin(k.divisi));
         DefaultTableModel model = (DefaultTableModel) tabelLog.getModel();
         model.setRowCount(0);
         Object rowData[] = new Object[3];
@@ -102,6 +120,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         tabelLog = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -203,6 +222,14 @@ public class MenuAdmin extends javax.swing.JFrame {
         }
 
         jMenu1.setText("Pengaturan");
+
+        jMenuItem3.setText("Buat akun member");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
 
         jMenuItem1.setText("Ubah profil / Password");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -315,7 +342,7 @@ public class MenuAdmin extends javax.swing.JFrame {
 
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
         KartuTIK k = new KartuTIK();
-        k.Logout(k.idUser);
+        k.Logout(k.idUser, k.divisi);
         t.stop();
         t2.stop();
         Login l = new Login();
@@ -338,6 +365,14 @@ public class MenuAdmin extends javax.swing.JFrame {
         u.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        t.stop();
+        t2.stop();
+        BuatAkun b = new BuatAkun();
+        b.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -386,6 +421,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblJam;
     private javax.swing.JLabel lblNama;

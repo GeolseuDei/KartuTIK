@@ -196,7 +196,7 @@ public class TambahUbahTIK extends javax.swing.JFrame {
 
     public void PengisianDataLengkapCari() {
         KartuTIK k = new KartuTIK();
-        k.AmbilDataLengkapByKTP(Pencarian.ktp);
+        k.AmbilDataLengkapByKTP(Pencarian.ktp, k.divisi);
 
         //id = k.d.getId();
         txtNamaLengkap.setText(k.d.getNamalengkap());
@@ -1566,7 +1566,7 @@ public class TambahUbahTIK extends javax.swing.JFrame {
                     lblFoto.setText("");
                     directoryFoto = System.getProperty("user.dir") + "\\src\\foto\\" + nama;
                     KartuTIK d = new KartuTIK();
-                    if (d.InsertFoto(this.directoryFoto, txtKTP.getText() + txtNamaLengkap.getText() + "." + this.extension, txtKTP.getText())) {
+                    if (d.InsertFoto(this.directoryFoto, txtKTP.getText() + txtNamaLengkap.getText() + "." + this.extension, txtKTP.getText(),d.divisi)) {
                         JOptionPane.showMessageDialog(this, "Upload Foto (" + txtNamaLengkap.getText() + ") sukses!");
                         MenuTIK m = new MenuTIK();
                         m.setVisible(true);
@@ -1600,7 +1600,7 @@ public class TambahUbahTIK extends javax.swing.JFrame {
                     lblFoto.setText("");
                     directoryFoto = System.getProperty("user.dir") + "\\src\\foto\\" + nama;
                     KartuTIK d = new KartuTIK();
-                    if (d.UpdateFoto(this.directoryFoto, txtKTP.getText() + txtNamaLengkap.getText() + "." + this.extension, this.id)) {
+                    if (d.UpdateFoto(this.directoryFoto, txtKTP.getText() + txtNamaLengkap.getText() + "." + this.extension, this.id, d.divisi)) {
                         JOptionPane.showMessageDialog(this, "Perubahan Foto (" + txtNamaLengkap.getText() + ") sukses!");
                         MenuTIK m = new MenuTIK();
                         m.setVisible(true);
@@ -1798,7 +1798,7 @@ public class TambahUbahTIK extends javax.swing.JFrame {
 
                                 int val = JOptionPane.showConfirmDialog(this, "Apa anda sudah yakin untuk menambah data?", "Peringatan!", JOptionPane.YES_NO_OPTION);
                                 if (val == JOptionPane.YES_OPTION) {
-                                    if (d.InsertDataTIK()) {
+                                    if (d.InsertDataTIK(d.divisi)) {
                                         JOptionPane.showMessageDialog(this, "Penambahan data sukses! Sekarang pilihlah foto untuk di upload!");
                                         btnFoto.setEnabled(true);
                                         txtFieldEnabled(false);
@@ -1815,7 +1815,7 @@ public class TambahUbahTIK extends javax.swing.JFrame {
                     }
                 }
 
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Pengisian (Umur, Tinggi, Tahun lulus) harus berupa angka.");
             }
         } else if (MenuTIK.tambahUbah == 2) {
@@ -1871,7 +1871,7 @@ public class TambahUbahTIK extends javax.swing.JFrame {
                 if (!txtTahunLulusSekolah6.getText().isEmpty()) {
                     Integer.parseInt(txtTahunLulusSekolah6.getText());
                 }
-                
+
                 if (txtNamaLengkap.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Masukkan nama lengkap!");
                 } else {
@@ -1966,7 +1966,7 @@ public class TambahUbahTIK extends javax.swing.JFrame {
 
                                 int val = JOptionPane.showConfirmDialog(this, "Apa anda sudah yakin untuk merubah data?", "Peringatan!", JOptionPane.YES_NO_OPTION);
                                 if (val == JOptionPane.YES_OPTION) {
-                                    if (d.UpdateDataTIK(this.id)) {
+                                    if (d.UpdateDataTIK(this.id, d.divisi)) {
                                         JOptionPane.showMessageDialog(this, "Perubahan data milik " + d.d.getNamalengkap() + " sukses!");
                                         int rep = JOptionPane.showConfirmDialog(this, "Apa anda mau merubah foto?", "Pertanyaan.", JOptionPane.YES_NO_OPTION);
                                         if (rep == JOptionPane.YES_OPTION) {
@@ -1992,14 +1992,14 @@ public class TambahUbahTIK extends javax.swing.JFrame {
                     }
                 }
 
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Pengisian (Umur, Tinggi, Tahun lulus) harus berupa angka.");
             }
         } else if (MenuTIK.tambahUbah == 3) {
             int val = JOptionPane.showConfirmDialog(this, "Apa anda sudah yakin akan Print data milik " + d.d.getNamalengkap() + " ?", "Peringatan!", JOptionPane.YES_NO_OPTION);
             if (val == JOptionPane.YES_OPTION) {
                 KartuTIK k = new KartuTIK();
-                if (d.PrintDataTIK(d.d.getNamalengkap(), k.idUser)) {
+                if (d.PrintDataTIK(d.d.getNamalengkap(), k.idUser, k.divisi)) {
                     JOptionPane.showMessageDialog(this, "Print data milik " + d.d.getNamalengkap() + " berhasil dilaksanakan!");
                     Pencarian p = new Pencarian();
                     p.setVisible(true);

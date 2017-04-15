@@ -332,14 +332,14 @@ public class Pencarian extends javax.swing.JFrame {
         btnCariActionPerformed(evt);
     }//GEN-LAST:event_txtNoKTPActionPerformed
 
-    static String urlfoto = "";
+    public static String urlfoto = "";
     boolean diTekan = false;
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
         if (!diTekan) {
             if (!txtNoKTP.getText().isEmpty() || !txtNoKTP.getText().equals("")) {
                 KartuTIK k = new KartuTIK();
                 String ktp = txtNoKTP.getText();
-                if (k.AmbilDataTIKByKTP(ktp)) {
+                if (k.AmbilDataTIKByKTP(ktp, k.divisi)) {
                     lblNoKTP.setText(k.d.getTglnoktp());
                     lblNama.setText(k.d.getNamalengkap());
                     lblAlias.setText(k.d.getAlias());
